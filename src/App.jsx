@@ -9,9 +9,9 @@ import Movies from './pages/Movies';
 import Contact from './pages/Contact';
 
 const pageContents = {
-  1: { tr: "Hakkımda İçerik", en: "About Me Content" },
-  2: { tr: "Sevdiğim Filmler İçerik", en: "Favourite Movies Content" },
-  3: { tr: "İletişim İçerik", en: "Contact Content" }
+  1: { tr: "Hakkımda", en: "About Me" },
+  2: { tr: "Sevdiğim Filmler", en: "Favorite Movies" },
+  3: { tr: "İletişim", en: "Contact" }
 };
 
 function Page({lang}) {

@@ -1,18 +1,18 @@
 function Movies({lang}) {
     return (
         <div>
-            <h1>{lang === 'en' ? 'Movies Page' : 'Filmler Sayfası'}</h1>
+            <h1>{lang === 'en' ? 'Favorite Movies' : 'Sevdiğim Filmler'}</h1>
                 <ul>
-                    <li>Lorem, ipsum dolor.</li>
-                    <li>Voluptas, ipsa recusandae?</li>
-                    <li>Optio, soluta saepe.</li>
-                    <li>Vel, explicabo eos!</li>
-                    <li>Mollitia, in voluptate!</li>
-                    <li>Tempora, illum aliquam.</li>
-                    <li>Delectus, animi doloremque.</li>
-                    <li>Delectus, sequi dignissimos.</li>
-                    <li>Totam, aliquam iure?</li>
-                    <li>Officia, cum autem?</li>
+                    <li>{lang == 'en' ? 'Lorem, ipsum dolor' : 'Totam, aliquam iure?'}</li>
+                    <li>{lang == 'en' ? 'Voluptas, ipsa recusandae' : 'Officia, cum autem?'}</li>
+                    <li>{lang == 'en' ? 'Optio, soluta saepe.' : 'Tempora, illum aliquam.'}</li>
+                    <li>{lang == 'en' ? 'Vel, explicabo eos!' : 'Officia, cum autem?'}</li>
+                    <li>{lang == 'en' ? 'Mollitia, in voluptate!' : 'Officia, cum autem?'}</li>
+                    <li>{lang == 'en' ? 'empora, illum aliquam.' : 'Officia, cum autem?'}</li>
+                    <li>{lang == 'en' ? 'Delectus, animi doloremque.' : 'Officia, cum autem?'}</li>
+                    <li>{lang == 'en' ? 'Delectus, sequi dignissimos.' : 'Officia, cum autem?'}</li>
+                    <li>{lang == 'en' ? 'Totam, aliquam iure?' : 'Officia, cum autem?'}</li>
+                    <li>{lang == 'en' ? 'Officia, cum autem?' : 'Officia, cum autem?'}</li>
                 </ul>
         </div>
     );
