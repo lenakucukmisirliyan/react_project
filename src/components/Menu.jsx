@@ -1,11 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import menuData from '../data/menuData.json'
 
-const menuData = [
-    { id : 1, label : "Hakkımda", label_en : "About Me"},
-    { id : 2, label : "Sevdiğim Filmler", label_en : "Favourite Movies"},
-    { id : 3, label : "İletişim", label_en : "Contact"}
-];
 
 function Menu({lang}) {
     return (

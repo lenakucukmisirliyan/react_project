@@ -16,13 +16,12 @@ const pageContents = {
 
 function Page({lang}) {
   const {id} = useParams();
-  const content = pageContents[id];
-
-  if (!content) {
-    return <h1>{lang === 'en' ? 'Page not found' : 'Sayfa bulunamadı'}</h1>
-  }
-  else
-    return <h1>{content[lang]}</h1>
+  
+  if (id === '1') return <About lang={lang}/>
+  if (id === '2') return <Movies lang={lang}/>
+  if (id === '3') return <Contact lang={lang}/>
+  
+  return <h1>{lang === 'en' ? 'Page not found' : 'Sayfa bulunamadı'}</h1>
 }
 
 function App() {
@@ -37,10 +36,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Navigate to="/page/1" replace />} />
-        <Route path='/page/1' element={<About lang={lang}/>} />
-        <Route path='/page/2' element={<Movies lang={lang}/>} />
-        <Route path='/page/3' element={<Contact lang={lang}/>} />
+        <Route path="/page/:id" element={<Page lang={lang} />} />
       </Routes>
+
 
     </div>
   );

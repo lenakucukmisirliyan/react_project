@@ -1,11 +1,52 @@
-function Contact({lang}) {
+import { useState } from "react";
+
+function Contact ({lang}) {
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [email, setEmail] = useState('')
+    
+    function handleSubmit (e) {
+        e.preventDefault()
+        alert(lang == 'tr' ? 'Form Gönderildi!' : 'Form has been sent')
+
+        setName('');
+        setSurname('');
+        setEmail('');
+    }
+    
     return(
-        <div>
-            <h1>{lang === 'en' ? 'Contact' : 'İletişim'}</h1>
-            <li>{lang == 'tr' ? 'Cep: +90 534 380 66 45' : 'Phone: +90 534 380 66 45'}</li>
-            <li>{lang == 'tr' ? 'Adres: Beşiktaş / İstanbul' : 'Adress: Beşiktaş / İstanbul'}</li>
-        </div>
-    );
+        <form onSubmit={handleSubmit}>
+            <label>
+                {lang == 'tr' ? 'Ad : ' : 'Name : '}
+                <input 
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+            </label>
+            <br></br>
+            <label>
+                {lang == 'tr' ? 'Soyad : ' : 'Surname : '}
+                <input 
+                    type="text"
+                    value={surname}
+                    onChange={(e) => setSurname(e.target.value)}
+                />
+            </label>
+            <br></br>
+            <label>
+                {lang == 'tr' ? 'E-mail : ' : 'E-mail : '}
+                <input 
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </label>
+            <br></br>
+            <button type="submit">Gönder</button>
+        </form>
+    )
 }
+
 
 export default Contact;

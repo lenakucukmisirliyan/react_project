@@ -1,0 +1,5 @@
+[
+    { "id" : 1, "label" : "Hakkımda", "label_en" : "About Me"},
+    { "id" : 2, "label" : "Sevdiğim Filmler", "label_en" : "Favourite Movies"},
+    { "id" : 3, "label" : "İletişim", "label_en" : "Contact"}
+]
