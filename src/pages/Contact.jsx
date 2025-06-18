@@ -7,7 +7,7 @@ function Contact ({lang}) {
     
     function handleSubmit (e) {
         e.preventDefault()
-        alert(lang == 'tr' ? 'Form Gönderildi!' : 'Form has been sent')
+        alert(lang === 'tr' ? 'Form Gönderildi!' : 'Form has been sent')
 
         setName('');
         setSurname('');
@@ -43,7 +43,7 @@ function Contact ({lang}) {
                 />
             </label>
             <br></br>
-            <button type="submit">Gönder</button>
+            <button type="submit">{lang === 'tr' ? 'Gönder' : 'Send'}</button>
         </form>
     )
 }

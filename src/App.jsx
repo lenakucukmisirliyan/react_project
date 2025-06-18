@@ -7,11 +7,13 @@ import { Routes, Route, useParams, Navigate} from 'react-router-dom';
 import About from './pages/About';
 import Movies from './pages/Movies';
 import Contact from './pages/Contact';
+import Movies_redux from './pages/Movies_redux';
 
 const pageContents = {
   1: { tr: "Hakkımda", en: "About Me" },
   2: { tr: "Sevdiğim Filmler", en: "Favorite Movies" },
-  3: { tr: "İletişim", en: "Contact" }
+  3: { tr: "İletişim", en: "Contact" },
+  4: { tr: "Sevdiğim Filmler Redux", en: "Favorite Movies Redux" }
 };
 
 function Page({lang}) {
@@ -20,6 +22,7 @@ function Page({lang}) {
   if (id === '1') return <About lang={lang}/>
   if (id === '2') return <Movies lang={lang}/>
   if (id === '3') return <Contact lang={lang}/>
+  if (id === '4') return <Movies_redux lang={lang} />
   
   return <h1>{lang === 'en' ? 'Page not found' : 'Sayfa bulunamadı'}</h1>
 }
