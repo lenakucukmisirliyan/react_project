@@ -15,30 +15,33 @@ export const menu = [
     label: { tr: "Hakkımda", en: "AboutMe" },
     url: '/hakkimda',
     url_en: '/about-me',
-    component: About
   },
   {
     id: 2,
     label: { tr: "Filmler", en: "Movies" },
     url: '/filmler',
     url_en: '/movies',
-    component: Movies
   },
   {
     id: 3,
     label: { tr: "İletişim", en: "Contact" },
     url: '/iletisim',
     url_en: '/contact',
-    component: Contact
   },
   {
     id: 4,
     label: { tr: "FilmlerRedux", en: "MoviesRedux" },
     url: '/filmler-redux',
     url_en: '/movies-redux',
-    component: Movies_redux
   }
 ]
+
+const componentsById = {
+  1: About,
+  2: Movies,
+  3: Contact,
+  4: Movies_redux
+};
 
 function App() {
   const [lang, setLang] = useState('tr')
@@ -54,7 +57,7 @@ function App() {
         <Route path="/" element={<Navigate to="/about-me" replace />} />
 
         {menu.map((item) => {
-          const Component = item.component;
+          const Component = componentsById[item.id];
           return (
             <Route
               key={item.id}
