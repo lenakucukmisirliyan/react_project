@@ -36,12 +36,20 @@ export const menu = [
   }
 ]
 
-const componentsById = {
-  1: About,
-  2: Movies,
-  3: Contact,
-  4: Movies_redux
+export const PAGE_ID_LIST = {
+  ABOUT: "1",
+  MOVIES: "2",
+  CONTACT: "3",
+  MOVIES_REDUX: "4",
 };
+
+const routeList = {
+  [PAGE_ID_LIST.ABOUT]: About,
+  [PAGE_ID_LIST.MOVIES]: Movies,
+  [PAGE_ID_LIST.CONTACT]: Contact,
+  [PAGE_ID_LIST.MOVIES_REDUX]: Movies_redux,
+};
+
 
 function App() {
   const [lang, setLang] = useState('tr')
@@ -57,7 +65,7 @@ function App() {
         <Route path="/" element={<Navigate to="/about-me" replace />} />
 
         {menu.map((item) => {
-          const Component = componentsById[item.id];
+          const Component = routeList[item.id];
           return (
             <Route
               key={item.id}
