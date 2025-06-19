@@ -3,43 +3,65 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Menu from './components/Menu';
-import { Routes, Route, useParams, Navigate} from 'react-router-dom';
+import { Routes, Route, useParams, Navigate } from 'react-router-dom';
 import About from './pages/About';
 import Movies from './pages/Movies';
 import Contact from './pages/Contact';
 import Movies_redux from './pages/Movies_redux';
 
-const pageContents = {
-  1: { tr: "Hakkımda", en: "About Me" },
-  2: { tr: "Sevdiğim Filmler", en: "Favorite Movies" },
-  3: { tr: "İletişim", en: "Contact" },
-  4: { tr: "Sevdiğim Filmler Redux", en: "Favorite Movies Redux" }
-};
-
-function Page({lang}) {
-  const {id} = useParams();
-  
-  if (id === '1') return <About lang={lang}/>
-  if (id === '2') return <Movies lang={lang}/>
-  if (id === '3') return <Contact lang={lang}/>
-  if (id === '4') return <Movies_redux lang={lang} />
-  
-  return <h1>{lang === 'en' ? 'Page not found' : 'Sayfa bulunamadı'}</h1>
-}
+export const menu = [
+  {
+    id: 1,
+    label: { tr: "Hakkımda", en: "AboutMe" },
+    url: '/hakkimda',
+    url_en: '/about-me',
+    component: About
+  },
+  {
+    id: 2,
+    label: { tr: "Filmler", en: "Movies" },
+    url: '/filmler',
+    url_en: '/movies',
+    component: Movies
+  },
+  {
+    id: 3,
+    label: { tr: "İletişim", en: "Contact" },
+    url: '/iletisim',
+    url_en: '/contact',
+    component: Contact
+  },
+  {
+    id: 4,
+    label: { tr: "FilmlerRedux", en: "MoviesRedux" },
+    url: '/filmler-redux',
+    url_en: '/movies-redux',
+    component: Movies_redux
+  }
+]
 
 function App() {
   const [lang, setLang] = useState('tr')
 
   return (
     <div>
-      <button onClick = {() => setLang('tr')}>Türkçe</button>
-      <button onClick = {() => setLang('en') }>English</button>
+      <button onClick={() => setLang('tr')}>Türkçe</button>
+      <button onClick={() => setLang('en')}>English</button>
 
-      <Menu lang = {lang}/>
+      <Menu lang={lang} />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/page/1" replace />} />
-        <Route path="/page/:id" element={<Page lang={lang} />} />
+        <Route path="/" element={<Navigate to="/about-me" replace />} />
+
+        {menu.map((item) => {
+          const Component = item.component;
+          return (
+            <Route
+              key={item.id}
+              path={lang === 'tr'? item.url : item.url_en}
+              element={<Component lang={lang} />}
+            />
+          )})}
       </Routes>
 
 

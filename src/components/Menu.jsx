@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import menuData from '../data/menuData.json'
+import { menu } from '../App';
 
 
 function Menu({lang}) {
     return (
         <nav>
             <ul>
-                {menuData.map(item => (
+                {menu.map(item => (
                     <li key={item.id}>
-                        <Link to = {`/page/${item.id}`}>
-                            {lang === 'en' ? item.label_en : item.label}
+                        <Link to={lang === 'tr' ? item.url : item.url_en}>
+                            {item.label[lang]}
                         </Link>
                     </li>
                 ))}
