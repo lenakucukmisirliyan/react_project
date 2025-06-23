@@ -16,6 +16,7 @@ function Contact ({lang}) {
     
     return(
         <form onSubmit={handleSubmit}>
+            <h2>{lang == 'en' ? 'Contact' : 'İletişim'}</h2>
             <label>
                 {lang == 'tr' ? 'Ad : ' : 'Name : '}
                 <input 

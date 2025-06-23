@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import { menu } from '../App';
+import { MENU_ITEMS } from "../constants/constant";
 
 
 function Menu({lang}) {
     return (
         <nav>
             <ul>
-                {menu.map(item => (
+                {MENU_ITEMS.map(item => (
                     <li key={item.id}>
                         <Link to={lang === 'tr' ? item.url : item.url_en}>
                             {item.label[lang]}

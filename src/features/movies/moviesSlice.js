@@ -26,7 +26,7 @@ const moviesSlice = createSlice({
         state.loading = false;
         state.items = action.payload;
       })
-      .addCase(fetchMovies.rejected, (state, action) => {
+      .addCase(fetchMovies.rejected, (state) => {
         state.loading = false;
         state.error = "Veri alınamadı!";
       });

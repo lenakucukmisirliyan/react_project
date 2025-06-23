@@ -14,6 +14,7 @@ function MovieList ({lang}) {
 
     return(
         <div>
+            <h2>{lang == 'en' ? 'Movies' : 'Filmler'}</h2>
             <ul>
                 {movies.slice(0, 10).map(movie => (
                     <li key={movie.id}>{lang === 'en' ? movie.original_title : movie.title}</li>

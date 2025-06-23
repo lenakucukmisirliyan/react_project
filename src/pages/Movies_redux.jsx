@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies } from "../features/movies/moviesSlice";
 
-function Movies_redux ({ lang }) {
+function Movies_redux({ lang }) {
     const dispatch = useDispatch();
-    const { items: movies, loading, error } = useSelector((state) => state.movies);
+    const { items, loading, error } = useSelector((state) => state.movies);
 
     useEffect(() => {
         dispatch(fetchMovies());
@@ -16,11 +16,11 @@ function Movies_redux ({ lang }) {
     return (
         <div>
             <h2>{lang === 'en' ? "Movies with Redux" : "Redux ile Filmler"}</h2>
-        <ul>
-            {movies.map((movie) => (
-                <li key={movie.id}>{lang === 'en' ? movie.original_title : movie.title}</li>
-            ))}
-        </ul>
+            <ul>
+                {items.map((movie) => (
+                    <li key={movie.id}>{lang === 'en' ? movie.original_title : movie.title}</li>
+                ))}
+            </ul>
         </div>
     );
 }
