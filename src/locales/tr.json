@@ -1,0 +1,18 @@
+{
+  "menu.1": "Hakkımda",
+  "menu.2": "Sevdiğim Filmler",
+  "menu.3": "İletişim",
+  "menu.4": "Sevdiğim Filmler Redux",
+  
+  "about.title": "Hakkımda",
+  "movies.title": "Sevdiğim Filmler",
+  "contact.title": "İletişim",
+  "moviesRedux.title": "Sevdiğim Filmler Redux",
+
+  "contact.name": "İsim",
+  "contact.surname": "Soyisim",
+  "contact.email": "E-posta",
+  "form.send": "Gönder",
+  "form.sent": "Form başarıyla gönderildi"
+
+}

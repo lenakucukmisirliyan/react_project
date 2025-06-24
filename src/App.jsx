@@ -7,6 +7,7 @@ import Movies from './pages/Movies';
 import Contact from './pages/Contact';
 import Movies_redux from './pages/Movies_redux';
 import { MENU_ITEMS, PAGE_ID_LIST } from './constants/constant';
+import { FormattedMessage } from 'react-intl';
 
 const routeList = {
   [PAGE_ID_LIST.ABOUT]: About,
@@ -15,15 +16,11 @@ const routeList = {
   [PAGE_ID_LIST.MOVIES_REDUX]: Movies_redux,
 };
 
-function App() {
-  const [lang, setLang] = useState('tr')
+function App({lang}) {
 
   return (
     <div>
-      <button onClick={() => setLang('tr')}>Türkçe</button>
-      <button onClick={() => setLang('en')}>English</button>
-
-      <Menu lang={lang} />
+      <Menu />
 
       <Routes>
         <Route path="/" element={<Navigate to="/about-me" replace />} />
@@ -33,8 +30,8 @@ function App() {
           return (
             <Route
               key={item.id}
-              path={lang === 'tr' ? item.url : item.url_en}
-              element={<Component lang={lang} />}
+              path={item.url_en}
+              element={<Component lang={lang}/>}
             />
           )
         })}

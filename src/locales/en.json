@@ -1,0 +1,20 @@
+{
+  "menu.1": "About Me",
+  "menu.2": "Favorite Movies",
+  "menu.3": "Contact",
+  "menu.4": "Favorite Movies Redux",
+  
+  "about.title": "About Me",
+  "movies.title": "Favorite Movies",
+  "contact.title": "Contact",
+  "moviesRedux.title": "Favorite Movies Redux",
+
+  "contact.name": "Name",
+  "contact.surname": "Surname",
+  "contact.email": "E-mail",
+
+  "form.send": "Send",
+  "form.sent": "Form has been sent successfully"
+
+
+}

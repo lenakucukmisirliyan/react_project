@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { MENU_ITEMS } from "../constants/constant";
+import { FormattedMessage } from "react-intl";
 
 
-function Menu({lang}) {
+function Menu() {
     return (
         <nav>
             <ul>
                 {MENU_ITEMS.map(item => (
                     <li key={item.id}>
-                        <Link to={lang === 'tr' ? item.url : item.url_en}>
-                            {item.label[lang]}
+                        <Link to={item.url_en}>
+                            <FormattedMessage id={`menu.${item.id}`}/>
                         </Link>
                     </li>
                 ))}

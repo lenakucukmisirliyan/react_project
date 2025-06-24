@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 const API_KEY = "23a0dfb4e623e111fa20f927a8922a98" 
 
@@ -6,18 +7,19 @@ function MovieList ({lang}) {
     const [movies, setMovies] = useState([]);
 
     useEffect (() => {
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=tr-TR&page=1`)
+        const apiLang = lang === "tr" ? "tr-TR" : "en-US";
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=${lang}&page=1`)
             .then(res => res.json())
             .then(data => setMovies(data.results))
             .catch(err => console.error("Veri alınamadı" ,err));
-    }, []);
+    }, [lang]);
 
     return(
         <div>
-            <h2>{lang == 'en' ? 'Movies' : 'Filmler'}</h2>
+            <h2><FormattedMessage id="movies.title" /></h2>
             <ul>
                 {movies.slice(0, 10).map(movie => (
-                    <li key={movie.id}>{lang === 'en' ? movie.original_title : movie.title}</li>
+                    <li key={movie.id}>{movie.title}</li>
                 ))}
             </ul>
         </div>

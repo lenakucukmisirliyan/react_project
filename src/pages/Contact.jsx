@@ -1,13 +1,14 @@
 import { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
-function Contact ({lang}) {
+function Contact () {
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
     
     function handleSubmit (e) {
         e.preventDefault()
-        alert(lang === 'tr' ? 'Form Gönderildi!' : 'Form has been sent')
+        alert('Form has been sent')
 
         setName('');
         setSurname('');
@@ -16,9 +17,9 @@ function Contact ({lang}) {
     
     return(
         <form onSubmit={handleSubmit}>
-            <h2>{lang == 'en' ? 'Contact' : 'İletişim'}</h2>
+            <h2><FormattedMessage id="contact.title" /></h2>
             <label>
-                {lang == 'tr' ? 'Ad : ' : 'Name : '}
+                <FormattedMessage id="contact.name"/>
                 <input 
                     type="text"
                     value={name}
@@ -27,7 +28,7 @@ function Contact ({lang}) {
             </label>
             <br></br>
             <label>
-                {lang == 'tr' ? 'Soyad : ' : 'Surname : '}
+                <FormattedMessage id="contact.surname"/>
                 <input 
                     type="text"
                     value={surname}
@@ -36,7 +37,7 @@ function Contact ({lang}) {
             </label>
             <br></br>
             <label>
-                {lang == 'tr' ? 'E-mail : ' : 'E-mail : '}
+                <FormattedMessage id="contact.email"/>
                 <input 
                     type="email"
                     value={email}
@@ -44,7 +45,7 @@ function Contact ({lang}) {
                 />
             </label>
             <br></br>
-            <button type="submit">{lang === 'tr' ? 'Gönder' : 'Send'}</button>
+            <button type="submit"><FormattedMessage id="form.send"/></button>
         </form>
     )
 }
