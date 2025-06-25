@@ -7,7 +7,8 @@ import Movies from './pages/Movies';
 import Contact from './pages/Contact';
 import Movies_redux from './pages/Movies_redux';
 import { MENU_ITEMS, PAGE_ID_LIST } from './constants/constant';
-import { FormattedMessage } from 'react-intl';
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const routeList = {
   [PAGE_ID_LIST.ABOUT]: About,
@@ -19,7 +20,7 @@ const routeList = {
 function App({lang}) {
 
   return (
-    <div>
+    <div className="app-container">
       <Menu />
 
       <Routes>

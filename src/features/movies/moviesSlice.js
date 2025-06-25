@@ -5,7 +5,7 @@ export const fetchMovies = createAsyncThunk(
     async (lang) => {
         const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=23a0dfb4e623e111fa20f927a8922a98&language=${lang}&page=1`)
         const data = await response.json();
-        return data.results.slice(0,10);
+        return data.results;
     }
 )
 

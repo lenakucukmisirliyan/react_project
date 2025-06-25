@@ -12,9 +12,8 @@
   "contact.name": "Name",
   "contact.surname": "Surname",
   "contact.email": "E-mail",
-
   "form.send": "Send",
-  "form.sent": "Form has been sent successfully"
 
-
+  "page.previous": "Previous",
+  "page.next": "Next"
 }

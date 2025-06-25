@@ -22,11 +22,11 @@ function Root() {
     <Provider store={store}>
       <BrowserRouter>
         <IntlProvider locale={locale} messages={messages[locale]}>
-          <div>
-            <button onClick={() => setLocale('tr')}>Türkçe</button>
-            <button onClick={() => setLocale('en')}>English</button>
-            <App lang={locale}/>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginBottom: '1rem' }}>
+            <button className="btn btn-danger" style={{marginRight: '10px'}}  onClick={() => setLocale('tr')}>Türkçe</button>
+            <button className="btn btn-primary" onClick={() => setLocale('en')}>English</button>
           </div>
+          <App lang={locale}/>
         </IntlProvider>
       </BrowserRouter>
     </Provider>
