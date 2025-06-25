@@ -1,6 +1,6 @@
 import { FormattedMessage } from "react-intl";
 
-function About() {
+const About = () => {
     return(
         <div className="about-paper" style={{ marginTop: 50 }}>
             <h2 style={{ marginBottom: 25, padding: 40, color:'black'}}><FormattedMessage id="about.title" /></h2>

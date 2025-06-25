@@ -2,10 +2,10 @@ import { useState } from 'react'
 import './App.css'
 import Menu from './components/Menu';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import About from './pages/About';
-import Movies from './pages/Movies';
-import Contact from './pages/Contact';
-import Movies_redux from './pages/Movies_redux';
+import About from './pages/about';
+import Movies from './pages/movies';
+import Contact from './pages/contact';
+import Movies_redux from './pages/movies';
 import { MENU_ITEMS, PAGE_ID_LIST } from './constants/constant';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,7 +17,7 @@ const routeList = {
   [PAGE_ID_LIST.MOVIES_REDUX]: Movies_redux,
 };
 
-function App({lang}) {
+const App = ({lang}) => {
 
   return (
     <div className="app-container">

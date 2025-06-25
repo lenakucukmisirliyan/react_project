@@ -1,12 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { API_KEY } from '../../constants/constant';
 
 export const fetchMovies = createAsyncThunk(
-    'movies/fetchMovies',
-    async (lang) => {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=23a0dfb4e623e111fa20f927a8922a98&language=${lang}&page=1`)
-        const data = await response.json();
-        return data.results;
-    }
+  'movies/fetchMovies',
+  async (lang) => {
+    const response = await axios.get(`https://api.themoviedb.org/3/movie/popular`,
+      {
+        params: {
+          api_key: API_KEY,
+          language: lang,
+          page: 1
+        }
+      });
+
+    return response.data.results;
+  }
 )
 
 const moviesSlice = createSlice({

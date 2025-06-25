@@ -4,7 +4,7 @@ import { MENU_ITEMS } from "../constants/constant";
 import { FormattedMessage } from "react-intl";
 
 
-function Menu() {
+const Menu = () => {
     return (
         <nav 
             className="navbar navbar-expand-lg navbar-light bg-warning"

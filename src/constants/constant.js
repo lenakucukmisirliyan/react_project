@@ -1,3 +1,6 @@
+import messages_tr from '../locales/tr.json';
+import messages_en from '../locales/en.json';
+
 export const MENU_ITEMS = [
   {
     id: 1,
@@ -27,3 +30,10 @@ export const PAGE_ID_LIST = {
   CONTACT: 3,
   MOVIES_REDUX: 4,
 };
+
+export const messages = {
+  tr: messages_tr,
+  en: messages_en,
+};
+
+export const API_KEY = "23a0dfb4e623e111fa20f927a8922a98"

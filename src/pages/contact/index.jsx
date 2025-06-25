@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 
-function Contact () {
+const Contact = () => {
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
     
-    function handleSubmit (e) {
+    const handleSubmit = (e) => {
         e.preventDefault()
         alert('Form has been sent')
 
@@ -24,7 +24,7 @@ function Contact () {
                     <input 
                         type="text"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setName(e?.target?.value)}
                         class="form-control"
                     />
                 </label>
@@ -34,7 +34,7 @@ function Contact () {
                     <input 
                         type="text"
                         value={surname}
-                        onChange={(e) => setSurname(e.target.value)}
+                        onChange={(e) => setSurname(e?.target?.value)}
                         class="form-control"
                     />
                 </label>
@@ -44,7 +44,7 @@ function Contact () {
                     <input 
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e?.target?.value)}
                         class="form-control"
                     />
                 </label>

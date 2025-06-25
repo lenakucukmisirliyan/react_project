@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies } from "../features/movies/moviesSlice";
 import { FormattedMessage } from "react-intl";
 
-function Movies_redux({ lang }) {
+const Movies_redux = ({ lang }) => {
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -28,7 +28,7 @@ function Movies_redux({ lang }) {
                     className="form-control"
                     placeholder="Search by name..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => setSearchTerm(e?.target?.value)}
                 />
             </span>
 
