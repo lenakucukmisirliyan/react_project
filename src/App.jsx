@@ -1,14 +1,11 @@
-import { useState } from 'react'
-import './App.css'
 import Menu from './components/Menu';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import About from './pages/about';
 import Movies from './pages/movies';
 import Contact from './pages/contact';
-import Movies_redux from './pages/movies';
+import Movies_redux from './pages/movies_redux';
 import { MENU_ITEMS, PAGE_ID_LIST } from './constants/constant';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/main.scss';
 
 const routeList = {
   [PAGE_ID_LIST.ABOUT]: About,

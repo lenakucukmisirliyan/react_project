@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies } from "../features/movies/moviesSlice";
+import { fetchMovies } from "../../features/movies/moviesSlice";
 import { FormattedMessage } from "react-intl";
 
 const Movies_redux = ({ lang }) => {
@@ -22,7 +22,7 @@ const Movies_redux = ({ lang }) => {
 
     return (
         <div>
-            <span style={{ display: 'inline-block', float: 'right', width: '200px' }}>
+            <span className="search-box">
                 <input
                     type="text"
                     className="form-control"
@@ -32,27 +32,16 @@ const Movies_redux = ({ lang }) => {
                 />
             </span>
 
-            <h2 className="list-group-item list-group-item-danger p-3"
-                style={{
-                    fontSize: '40px',
-                    width: '50%',
-                    margin: '0 auto 10px 305px',
-                    textAlign: 'center',
-                }}>
+            <h2 className="header list-group-item list-group-item-danger p-3 ">
                 <FormattedMessage id="moviesRedux.title" />
             </h2>
 
             <ul>
                 {filteredMovies.map((movie) => (
                     <li key={movie.id}
-                        className="list-group-item list-group-item-primary"
-                        style={{
-                            width: '50%',
-                            position: 'relative',
-                            paddingLeft: '1.2em',
-                            margin: '0 auto 1px auto',
-                        }}
-                    >{movie.title}</li>
+                        className="list-group-item list-group-item-info films">
+                        {movie.title}
+                    </li>
                 ))}
             </ul>
         </div>

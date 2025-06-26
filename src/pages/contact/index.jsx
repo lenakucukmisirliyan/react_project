@@ -18,7 +18,7 @@ const Contact = () => {
     return(
         <form onSubmit={handleSubmit}>
             <div class="mb-3">
-                <h2><FormattedMessage id="contact.title" /></h2>
+                <h2 className = "header-font"><FormattedMessage id="contact.title" /></h2>
                 <label class="form-label">
                     <FormattedMessage id="contact.name"/>
                     <input 

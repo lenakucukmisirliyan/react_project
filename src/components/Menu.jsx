@@ -7,16 +7,8 @@ import { FormattedMessage } from "react-intl";
 const Menu = () => {
     return (
         <nav 
-            className="navbar navbar-expand-lg navbar-light bg-warning"
-            style={{
-                fontSize: 25,
-                color:"black",
-                fontFamily: 'system-ui, Avenir, Helvetica, Arial, sans-serif, bold',
-                margin: '0 auto 10px auto',
-                textAlign: 'center',
-                position: 'relative',
-            }}>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            className="menu navbar navbar-expand-lg navbar-light bg-warning">
+            <div className="collapse navbar-collapse">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
                     {MENU_ITEMS.map(item => (
                         <li key={item.id}

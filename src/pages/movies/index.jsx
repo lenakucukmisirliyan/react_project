@@ -35,7 +35,7 @@ const handleNextPage = () => {
 
 return (
     <div>
-        <span style={{ display: 'inline-block', float: 'right', width: '200px' }}>
+        <span className="search-box">
             <input
                 type="text"
                 className="form-control"
@@ -45,26 +45,14 @@ return (
             />
         </span>
 
-        <h2 className="list-group-item list-group-item-danger p-3"
-            style={{
-                fontSize: '40px',
-                width: '50%',
-                margin: '0 auto 10px 305px',
-                textAlign: 'center',
-            }}>
+        <h2 className="header list-group-item list-group-item-danger p-3">
             <FormattedMessage id="movies.title" />
         </h2>
 
         <ul>
             {filteredMovies.slice(0, 10).map(movie => (
                 <li key={movie.id}
-                    className="list-group-item list-group-item-info "
-                    style={{
-                        width: '50%',
-                        position: 'relative',
-                        paddingLeft: '1.2em',
-                        margin: '0 auto 1px auto',
-                    }}>
+                    className="list-group-item list-group-item-info films">
                     {movie.title}
                 </li>
             ))}

@@ -1,0 +1,235 @@
+@import "bootstrap/scss/bootstrap";
+
+// Değişkenler
+$font-main: system-ui, Avenir, Helvetica, Arial, sans-serif;
+$font-mono: 'Courier New', Courier, monospace;
+
+$color-text-light: rgba(255, 255, 255, 0.87);
+$color-text-dark: #213547;
+
+$color-bg-dark: #242424;
+$color-bg-light: #ffffff;
+
+$color-primary: #646cff;
+$color-primary-hover: #535bf2;
+$color-primary-hover-light: #747bff;
+
+$button-bg-dark: #1a1a1a;
+$button-bg-light: #f9f9f9;
+
+// Temel stiller
+:root {
+  font-family: $font-main;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: $color-text-light;
+  background-color: $color-bg-dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: $color-primary;
+  text-decoration: inherit;
+
+  &:hover {
+    color: $color-primary-hover;
+  }
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-y: scroll;
+  color: var(--text-color);
+  font-family: $font-main;
+  background-color: #fcf3f1 !important;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: $button-bg-dark;
+  cursor: pointer;
+  transition: border-color 0.25s;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+}
+
+nav {
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
+
+.typewriter {
+  font-family: $font-mono, bold;
+}
+
+.about-paper {
+  background-image: url('/src/assets/paper-texture.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  font-family: $font-mono;
+  color: #5b4636;
+  margin-top: 50px;
+  
+  h2 {
+    margin: 25px; 
+    padding: 40px;
+    color: black;
+  }
+
+  p {
+    color:black;
+  }
+
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+
+  &.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: $color-text-dark;
+    background-color: $color-bg-light;
+  }
+
+  a:hover {
+    color: $color-primary-hover-light;
+  }
+
+  button {
+    background-color: $button-bg-light;
+  }
+}
+
+.search-box {
+    display: inline-flex;
+    float: right;
+}
+
+.header {
+  font-size: 40px;
+  width: 50%;
+  margin: 0 auto 10px 305px;
+  text-align: center;
+}
+
+.films {
+  width: 50%;
+  position: relative;
+  padding-left: 1.2em;
+  margin: 0 auto 1px auto;
+}
+
+.header-font {
+  font-size: 40px;
+  width: 50%;
+  text-align: center;
+  margin: 20px auto 
+}
+
+.switch-button {
+  display: flex; 
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.menu {
+  font-size: 25px;
+  color: black;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, bold;
+  margin: 0 auto 10px auto;
+  text-align: center;
+  position: relative;
+}
