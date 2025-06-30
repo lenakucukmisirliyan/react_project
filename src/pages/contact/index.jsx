@@ -17,39 +17,39 @@ const Contact = () => {
     
     return(
         <form onSubmit={handleSubmit}>
-            <div class="mb-3">
+            <div className="mb-3">
                 <h2 className = "header-font"><FormattedMessage id="contact.title" /></h2>
-                <label class="form-label">
+                <label className="form-label">
                     <FormattedMessage id="contact.name"/>
                     <input 
                         type="text"
                         value={name}
                         onChange={(e) => setName(e?.target?.value)}
-                        class="form-control"
+                        className="form-control"
                     />
                 </label>
                 <br></br>
-                <label class="form-label">
+                <label className="form-label">
                     <FormattedMessage id="contact.surname"/>
                     <input 
                         type="text"
                         value={surname}
                         onChange={(e) => setSurname(e?.target?.value)}
-                        class="form-control"
+                        className="form-control"
                     />
                 </label>
                 <br></br>
-                <label class="form-label">
+                <label className="form-label">
                     <FormattedMessage id="contact.email"/>
                     <input 
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e?.target?.value)}
-                        class="form-control"
+                        className="form-control"
                     />
                 </label>
                 <br></br>
-                <button type="submit" class="btn btn-info"><FormattedMessage id="form.send"/></button>
+                <button type="submit" className="btn btn-info"><FormattedMessage id="form.send"/></button>
             </div>
         </form>
     )

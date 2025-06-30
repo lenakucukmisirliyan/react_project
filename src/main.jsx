@@ -1,31 +1,29 @@
-import React, {useState} from 'react';
 import { createRoot } from 'react-dom/client';
-import './styles/main.scss';
-import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
 import { IntlProvider } from 'react-intl';
-import { messages } from './constants/constant.js';
+import { store } from './app/store';
+import App from './App';
 import LanguageSwitcher from './locales/LanguageSwitcher';
+import { messages } from './constants';
+import './styles/main.scss';
+import { useState } from 'react';
 
 const Root = () => {
   const [locale, setLocale] = useState('tr');
 
-  return(
+  return (
     <Provider store={store}>
       <BrowserRouter>
         <IntlProvider locale={locale} messages={messages[locale]}>
           <LanguageSwitcher locale={locale} setLocale={setLocale} />
-          <App lang={locale}/>
+          <App lang={locale} />
         </IntlProvider>
       </BrowserRouter>
     </Provider>
-  )
-}
+  );
+};
 
 createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Root />
-  </React.StrictMode>
+  <Root />
 );
