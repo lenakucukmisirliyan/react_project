@@ -233,3 +233,14 @@ nav {
   text-align: center;
   position: relative;
 }
+
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  
+  h6 {
+    margin-right: 100;
+  }
+}

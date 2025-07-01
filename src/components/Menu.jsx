@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from 'react-router-dom';
 import { MENU_ITEMS } from "../constants/index";
 import { FormattedMessage } from "react-intl";

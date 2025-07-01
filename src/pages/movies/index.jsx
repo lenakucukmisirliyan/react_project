@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import useMoviesActions from "../../hooks/useMoviesActions";
 
@@ -11,17 +11,16 @@ const Movies = ({ lang }) => {
     getMovies({ language: lang === "tr" ? "tr-TR" : "en-US", page: currentPage });
   }, [lang, currentPage]);
 
-  // Filtreleme arama terimine göre
-  const filteredMovies = moviesData?.filter(movie =>
+  const filteredMovies = moviesData?.filter((movie) =>
     movie.title.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
   const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
+    setCurrentPage((prev) => prev + 1);
   };
 
   return (
@@ -51,7 +50,7 @@ const Movies = ({ lang }) => {
         ))}
       </ul>
 
-      <div>
+      <div className="pagination-wrapper">
         <button
           onClick={handlePrevPage}
           className="btn btn-secondary me-2"
@@ -59,6 +58,7 @@ const Movies = ({ lang }) => {
         >
           <FormattedMessage id="page.previous" />
         </button>
+        <h6>{currentPage}</h6>
         <button onClick={handleNextPage} className="btn btn-secondary">
           <FormattedMessage id="page.next" />
         </button>

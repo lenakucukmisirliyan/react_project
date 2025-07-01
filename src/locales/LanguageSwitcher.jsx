@@ -1,5 +1,3 @@
-import React from 'react';
-
 const LanguageSwitcher = ({ locale, setLocale }) => {
     return (
         <div className='switch-button'>

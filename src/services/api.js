@@ -1,8 +1,7 @@
-import { API_KEY } from '../constants';
 import axios from 'axios';
+import { API_KEY } from '../constants';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -16,7 +15,13 @@ export const apiConfigs = {
   movies: {
     list: {
       method: 'GET',
-      url: '/movie/popular',
+      url: 'https://api.themoviedb.org/3/movie/popular',
+    },
+  },
+  contact: {
+    send: {
+      method: 'POST',
+      url: 'https://jsonplaceholder.typicode.com/posts', // Sahte API
     },
   },
 };

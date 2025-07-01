@@ -6,18 +6,14 @@ import { setMoviesDataAction } from '../features/movies/moviesSlice';
 const useMoviesActions = () => {
   const dispatch = useDispatch();
   const { serviceCall } = useService();
-
   const moviesData = useSelector((state) => state.movies.moviesData);
 
   const getMovies = async (params) => {
     try {
       const res = await serviceCall({ ...apiConfigs.movies.list, params });
-
-      const movies = res?.results || [];
-
-      dispatch(setMoviesDataAction(movies));
+      dispatch(setMoviesDataAction(res?.results || []));
     } catch (error) {
-      console.error("Film çekme hatası:", error);
+      console.error("Failed to fetch movies:", error);
       dispatch(setMoviesDataAction([]));
     }
   };
