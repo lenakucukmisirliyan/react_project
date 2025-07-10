@@ -1,13 +1,28 @@
 import axiosInstance from './api';
+import { METHOD } from '../constants';
+import usePageLoader from '../utils/usePageLoader';
 
 const useService = () => {
-  const serviceCall = async ({ url, method = 'GET', params }) => {
+  const { showPageLoader, hidePageLoader } = usePageLoader();
+
+  const serviceCall = async ({ url, method = METHOD.GET, params, data, headers = {} }) => {
     try {
-      const response = await axiosInstance({ method, url, params });
+      showPageLoader(); // ⏳ 1. Loader'ı başlat
+
+      const response = await axiosInstance({
+        method,
+        url,
+        params,
+        data,
+        headers,
+      });
+
       return response?.data;
     } catch (error) {
       console.error('API Error:', error);
       return null;
+    } finally {
+      hidePageLoader(); // ✅ 2. Loader'ı durdur
     }
   };
 

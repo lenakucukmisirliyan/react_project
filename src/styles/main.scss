@@ -129,7 +129,6 @@ nav {
   p {
     color:black;
   }
-
 }
 
 #root {
@@ -235,7 +234,7 @@ nav {
 }
 
 .pagination-wrapper {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -243,4 +242,89 @@ nav {
   h6 {
     margin-right: 100;
   }
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Sayfa numaraları ile butonlar arası boşluk */
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px; /* alttaki butonlardan biraz boşluk bırak */
+}
+
+.prev-next-buttons {
+  display: flex;
+  gap: 5px; /* Butonlar arası boşluk */
+  width: 150px; /* Butonların genişliği */
+}
+
+.prev-next-buttons button {
+  padding: 8px 0;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+// ----------- Form elementleri için stil -----------
+
+input, textarea {
+  width: 100%;
+  font-family: $font-main;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.25s;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 5px $color-primary;
+  }
+}
+// ----------- Loader için stil -----------
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-image {
+  width: 60px;  /* istediğin genişlik */
+  height: auto;
+  animation: spin 2s linear infinite; /* İstersen döndürme animasyonu ekle */
+}
+
+.loader-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

@@ -8,6 +8,7 @@ import LanguageSwitcher from './locales/LanguageSwitcher';
 import { messages } from './constants';
 import './styles/main.scss';
 import { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Root = () => {
   const [locale, setLocale] = useState('tr');

@@ -19,3 +19,8 @@ export const messages = {
 };
 
 export const API_KEY = '23a0dfb4e623e111fa20f927a8922a98';
+
+export const METHOD = {
+  GET : 'GET',
+  POST : 'POST'
+}

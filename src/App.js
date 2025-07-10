@@ -5,6 +5,7 @@ import Movies from './pages/movies';
 import Contact from './pages/contact';
 import { MENU_ITEMS, PAGE_ID_LIST } from './constants/index';
 import './styles/main.scss';
+import Loader from './components/Loader';
 
 const routeList = {
   [PAGE_ID_LIST.ABOUT]: About,
@@ -15,8 +16,9 @@ const routeList = {
 const App = ({ lang }) => {
   return (
     <div className="app-container">
+      
       <Menu lang={lang} />
-
+      <Loader />
       <Routes>
         <Route path="/" element={<Navigate to="/about-me" replace />} />
         {MENU_ITEMS.map(item => {
