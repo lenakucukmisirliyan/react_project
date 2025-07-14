@@ -10,10 +10,18 @@
   "moviesRedux.title": "Sevdiğim Filmler Redux",
 
   "contact.name": "İsim",
-  "contact.surname": "Soyisim",
   "contact.email": "E-posta",
+  "contact.message": "Mesajınız",
   "form.send": "Gönder",
 
   "page.previous": "Önceki",
-  "page.next": "Sonraki"
+  "page.next": "Sonraki",
+
+  "search.noresults": "Bu sayfada eşleşen film bulunamadı.",
+  "notfound.message": "Aradığınız sayfa bulunamadı.",
+
+  "movieDetail.releaseDate": "Çıkış Tarihi",
+  "movieDetail.voteAverage": "Oy Ortalaması",
+  "movieDetail.noOverview": "Açıklama bulunamadı.",
+  "button.backToMovies": "Filmlere Dön"
 }

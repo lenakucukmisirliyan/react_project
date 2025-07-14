@@ -51,6 +51,8 @@ body {
   color: var(--text-color);
   font-family: $font-main;
   background-color: #fcf3f1 !important;
+  margin: 0;
+  padding-top: 0px;
 }
 
 .app-container {
@@ -89,6 +91,13 @@ button {
 }
 
 nav {
+  position: fixed;
+  top: 0;
+  z-index: 999; // diğer elementlerin altında kalmasın diye
+  background-color: white; // yapışınca altı görünmesin
+  width: 100%;
+  height: 60px;
+
   ul {
     list-style: none;
     padding: 0;
@@ -115,19 +124,19 @@ nav {
   background-position: center;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   font-family: $font-mono;
   color: #5b4636;
   margin-top: 50px;
-  
+
   h2 {
-    margin: 25px; 
+    margin: 25px;
     padding: 40px;
     color: black;
   }
 
   p {
-    color:black;
+    color: black;
   }
 }
 
@@ -157,6 +166,7 @@ nav {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -192,8 +202,8 @@ nav {
 }
 
 .search-box {
-    display: inline-flex;
-    float: right;
+  display: inline-flex;
+  float: right;
 }
 
 .header {
@@ -214,11 +224,11 @@ nav {
   font-size: 40px;
   width: 50%;
   text-align: center;
-  margin: 20px auto 
+  margin: 20px auto
 }
 
 .switch-button {
-  display: flex; 
+  display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-bottom: 1rem;
@@ -238,7 +248,7 @@ nav {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  
+
   h6 {
     margin-right: 100;
   }
@@ -248,7 +258,8 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; /* Sayfa numaraları ile butonlar arası boşluk */
+  gap: 20px;
+  /* Sayfa numaraları ile butonlar arası boşluk */
 }
 
 .pagination {
@@ -256,13 +267,16 @@ nav {
   gap: 8px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px; /* alttaki butonlardan biraz boşluk bırak */
+  margin-bottom: 15px;
+  /* alttaki butonlardan biraz boşluk bırak */
 }
 
 .prev-next-buttons {
   display: flex;
-  gap: 5px; /* Butonlar arası boşluk */
-  width: 150px; /* Butonların genişliği */
+  gap: 5px;
+  /* Butonlar arası boşluk */
+  width: 150px;
+  /* Butonların genişliği */
 }
 
 .prev-next-buttons button {
@@ -275,7 +289,8 @@ nav {
 
 // ----------- Form elementleri için stil -----------
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   font-family: $font-main;
   font-size: 1em;
@@ -290,12 +305,13 @@ input, textarea {
     box-shadow: 0 0 5px $color-primary;
   }
 }
+
 // ----------- Loader için stil -----------
 
 .loader-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -303,9 +319,11 @@ input, textarea {
 }
 
 .loader-image {
-  width: 60px;  /* istediğin genişlik */
+  width: 60px;
+  /* istediğin genişlik */
   height: auto;
-  animation: spin 2s linear infinite; /* İstersen döndürme animasyonu ekle */
+  animation: spin 2s linear infinite;
+  /* İstersen döndürme animasyonu ekle */
 }
 
 .loader-backdrop {
@@ -325,6 +343,36 @@ input, textarea {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.back-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer
+}
+
+.back-button-img {
+  width: 100px;
+  display: inline-block
+}
+
+.movie-poster {
+  width: 250px;
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.movie-link {
+  text-decoration: none;
 }

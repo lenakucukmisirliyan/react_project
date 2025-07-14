@@ -19,6 +19,10 @@ export const apiConfigs = {
       url: 'https://api.themoviedb.org/3/movie/popular',
     },
   },
+  search: {
+    method: METHOD.GET,
+    url: 'https://api.themoviedb.org/3/search/movie',
+  },
   contact: {
     send: {
       method: METHOD.POST,

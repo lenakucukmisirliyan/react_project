@@ -7,7 +7,7 @@ const useService = () => {
 
   const serviceCall = async ({ url, method = METHOD.GET, params, data, headers = {} }) => {
     try {
-      showPageLoader(); // ⏳ 1. Loader'ı başlat
+      showPageLoader();
 
       const response = await axiosInstance({
         method,
@@ -22,7 +22,7 @@ const useService = () => {
       console.error('API Error:', error);
       return null;
     } finally {
-      hidePageLoader(); // ✅ 2. Loader'ı durdur
+      hidePageLoader();
     }
   };
 

@@ -1,18 +1,18 @@
 import { useState } from "react";
 import useContactActions from "./useContactActions";
 import Loader from "../../components/Loader";
+import { FormattedMessage } from 'react-intl';
+import { useSelector } from "react-redux";
 
 const Contact = () => {
   const { sendContactForm } = useContactActions();
+  const isLoading = useSelector((state) => state.loader.isLoading);
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-
-  // Başarılı gönderim kontrolü için bir state ekleyebilirsin (opsiyonel)
-  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,11 +33,11 @@ const Contact = () => {
 
   return (
     <div>
-      <h2>İletişim</h2>
+      <h2><FormattedMessage id="contact.title" defaultMessage="İletişim" /></h2>
 
       <form onSubmit={handleSubmit}>
         <label className="mb-3">
-          Adınız:
+          <FormattedMessage id="contact.name" defaultMessage="Adınız:" />
           <input
             type="text"
             name="name"
@@ -49,7 +49,7 @@ const Contact = () => {
         <br />
 
         <label className="mb-3">
-          E-posta:
+          <FormattedMessage id="contact.email" defaultMessage="Email:" />
           <input
             type="email"
             name="email"
@@ -60,9 +60,10 @@ const Contact = () => {
         </label>
         <br />
 
-        <label className="text-muted">
-          Mesajınız:
+        <label className="mb-3">
+          <FormattedMessage id="contact.message" defaultMessage="Mesajınız:" />
           <textarea
+            type="text"
             name="message"
             value={formData.message}
             onChange={handleChange}
@@ -72,11 +73,11 @@ const Contact = () => {
         <br />
 
         <button type="submit" className="btn btn-primary">
-          Gönder
+          <FormattedMessage id="form.send" defaultMessage="Gönder" />
         </button>
       </form>
 
-      <Loader />
+      {isLoading && < Loader />}
     </div>
   );
 };

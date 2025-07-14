@@ -10,10 +10,18 @@
   "moviesRedux.title": "Favorite Movies Redux",
 
   "contact.name": "Name",
-  "contact.surname": "Surname",
   "contact.email": "E-mail",
+  "contact.message": "Your Message",
   "form.send": "Send",
 
   "page.previous": "Previous",
-  "page.next": "Next"
+  "page.next": "Next",
+
+  "search.noresults": "No movies found on this page.",
+  "notfound.message": "Page not found.",
+
+  "movieDetail.releaseDate": "Release Date",
+  "movieDetail.voteAverage": "Vote Average",
+  "movieDetail.noOverview": "No overview available.",
+  "button.backToMovies": "Back To Movies"
 }

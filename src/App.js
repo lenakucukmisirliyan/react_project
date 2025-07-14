@@ -6,6 +6,8 @@ import Contact from './pages/contact';
 import { MENU_ITEMS, PAGE_ID_LIST } from './constants/index';
 import './styles/main.scss';
 import Loader from './components/Loader';
+import NotFound from './pages/NotFound';
+import MovieDetail from './pages/movies/MovieDetail';
 
 const routeList = {
   [PAGE_ID_LIST.ABOUT]: About,
@@ -16,7 +18,7 @@ const routeList = {
 const App = ({ lang }) => {
   return (
     <div className="app-container">
-      
+
       <Menu lang={lang} />
       <Loader />
       <Routes>
@@ -31,6 +33,8 @@ const App = ({ lang }) => {
             />
           );
         })}
+        <Route path="/movies/:id" element={<MovieDetail lang={lang} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

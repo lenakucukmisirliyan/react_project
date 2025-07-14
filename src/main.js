@@ -7,11 +7,23 @@ import App from './App';
 import LanguageSwitcher from './locales/LanguageSwitcher';
 import { messages } from './constants';
 import './styles/main.scss';
-import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState, useEffect } from "react";
 
 const Root = () => {
   const [locale, setLocale] = useState('tr');
+
+  useEffect(() => {
+    const storedLocale = localStorage.getItem("appLocale");
+    if (storedLocale) {
+      setLocale(storedLocale);
+    }
+  }, []);
+
+  const handleLocaleChange = (newLocale) => {
+    setLocale(newLocale);
+    localStorage.setItem("appLocale", newLocale);
+  };
 
   return (
     <Provider store={store}>

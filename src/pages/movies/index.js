@@ -4,11 +4,13 @@ import useMoviesActions from "./useMoviesActions";
 import Pagination from "../../components/Pagination";
 import { useSearchParams } from "react-router-dom";
 import Loader from "../../components/Loader";
-import { useSelector } from "react-redux"; // Redux'tan loader kontrolü
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 const Movies = ({ lang }) => {
   const { getMovies } = useMoviesActions();
-  const isLoading = useSelector((state) => state.loader.isLoading); // loader state
+  const isLoading = useSelector((state) => state.loader.isLoading);
 
   const frontendPageSize = 10;
   const apiPageSize = 20;
@@ -39,8 +41,9 @@ const Movies = ({ lang }) => {
 
     const params = {
       page: apiPage,
-      language: lang === "tr" ? "tr-TR" : "en-US",
-    };
+      language: lang === "tr" ? "tr" : "en",
+      query: searchTerm.trim() === "" ? undefined : searchTerm.trim() // Eğer arama varsa, query parametresini ekle
+    };  // trim : bir string’in başındaki ve sonundaki boşlukları temizler.
 
     getMovies(params, (result) => {
       if (result && Array.isArray(result.results)) {
@@ -52,7 +55,6 @@ const Movies = ({ lang }) => {
         setLastApiResults(result.results);
         setApiTotalPages(apiTotalPagesResult);
       } else {
-        console.error("API'den sonuç yok veya beklenmeyen format:", result);
         setLastApiResults([]);
         setTotalPages(1);
       }
@@ -61,32 +63,16 @@ const Movies = ({ lang }) => {
 
   useEffect(() => {
     getMoviesReq();
-  }, [lang, currentPage]);
+  }, [lang, currentPage, searchTerm]); // Arama veya dil veya sayfa değişince çağır
 
-  useEffect(() => {
-    if (searchTerm.trim() !== "") {
-      changePage(1);
-    }
-  }, [searchTerm]);
-
-  const filteredMovies = lastApiResults.filter((movie) =>
-    movie.title.toLowerCase().startsWith(searchTerm.toLowerCase())
-  );
-
-  useEffect(() => {
-    if (searchTerm.trim() === "") {
-      setTotalPages(apiTotalPages * (apiPageSize / frontendPageSize));
-    } else {
-      const totalFilteredPages = Math.ceil(filteredMovies.length / frontendPageSize);
-      setTotalPages(totalFilteredPages);
-    }
-  }, [searchTerm, apiTotalPages, filteredMovies]);
+  // Search filtering artık API üzerinden yapıldığı için frontend filtreleme kaldırıldı
+  // Çünkü query parametresi API'ye gidiyor, sonuçlar ona göre geliyor
 
   const frontendPageInApiPage = ((currentPage - 1) % (apiPageSize / frontendPageSize)) + 1;
   const startIndexInApiPage = (frontendPageInApiPage - 1) * frontendPageSize;
   const endIndexInApiPage = startIndexInApiPage + frontendPageSize;
 
-  const visibleMovies = filteredMovies.slice(startIndexInApiPage, endIndexInApiPage);
+  const visibleMovies = lastApiResults.slice(startIndexInApiPage, endIndexInApiPage);
 
   const handlePrevPage = () => {
     changePage(Math.max(currentPage - 1, 1));
@@ -96,7 +82,6 @@ const Movies = ({ lang }) => {
     changePage(Math.min(currentPage + 1, totalPages));
   };
 
-  // API çağrısı yapılırken sadece loader göster
   if (isLoading) return <Loader />;
 
   return (
@@ -107,7 +92,10 @@ const Movies = ({ lang }) => {
           className="form-control"
           placeholder="Search by name..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            changePage(1); // Arama yapınca sayfa 1'e dönsün, kullanıcı deneyimi için
+          }}
         />
       </span>
 
@@ -119,11 +107,15 @@ const Movies = ({ lang }) => {
         {visibleMovies.length > 0 ? (
           visibleMovies.map((movie) => (
             <li key={movie.id} className="list-group-item list-group-item-info films">
-              {movie.title}
+              <Link to={`/movies/${movie.id}?page=${currentPage}`} className="movie-link">
+                {movie.title || movie.original_title}
+              </Link>
             </li>
           ))
         ) : (
-          <li className="list-group-item">No movies found.</li>
+          <li className="list-group-item">
+            <FormattedMessage id="search.noresults" defaultMessage="No movies found on this page." />
+          </li>
         )}
       </ul>
 
