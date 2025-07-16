@@ -1,16 +1,41 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { FormattedMessage } from "react-intl";
 import useMoviesActions from "./useMoviesActions";
 import Pagination from "../../components/Pagination";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Loader from "../../components/Loader";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchTerm } from "../../features/movies/moviesSlice";
+import { debounce } from "lodash";
 
 const Movies = ({ lang }) => {
-  const { getMovies } = useMoviesActions();
+  const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.loader.isLoading);
+  const searchTerm = useSelector((state) => state.movies.searchTerm);
+
+  const [inputValue, setInputValue] = useState(searchTerm);
+
+  const { getMovies } = useMoviesActions();
+
+  const debouncedSetSearchTerm = useMemo(
+    () => debounce((val) => dispatch(setSearchTerm(val)), 500),
+    [dispatch]
+  );
+
+  const handleSearchChange = (e) => {
+    const val = e.target.value;
+    setInputValue(val);
+    debouncedSetSearchTerm(val);
+    changePage(1);
+  };
+
+  useEffect(() => {
+    setInputValue(searchTerm);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    return () => debouncedSetSearchTerm.cancel();
+  }, [debouncedSetSearchTerm]);
 
   const frontendPageSize = 10;
   const apiPageSize = 20;
@@ -19,11 +44,9 @@ const Movies = ({ lang }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialPage = parseInt(searchParams.get("page")) || 1;
   const [currentPage, setCurrentPage] = useState(initialPage);
-
   const [totalPages, setTotalPages] = useState(1);
   const [lastApiPage, setLastApiPage] = useState(0);
   const [lastApiResults, setLastApiResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [apiTotalPages, setApiTotalPages] = useState(1);
 
   const changePage = (page) => {
@@ -32,7 +55,8 @@ const Movies = ({ lang }) => {
   };
 
   const getMoviesReq = () => {
-    const apiPage = Math.floor(((currentPage - 1) * frontendPageSize) / apiPageSize) + 1;
+    const apiPage =
+      Math.floor(((currentPage - 1) * frontendPageSize) / apiPageSize) + 1;
 
     if (apiPage > maxApiPageLimit) {
       console.warn("API sayfa limiti aşıldı:", apiPage);
@@ -42,13 +66,15 @@ const Movies = ({ lang }) => {
     const params = {
       page: apiPage,
       language: lang === "tr" ? "tr" : "en",
-      query: searchTerm.trim() === "" ? undefined : searchTerm.trim() // Eğer arama varsa, query parametresini ekle
-    };  // trim : bir string’in başındaki ve sonundaki boşlukları temizler.
+      query: searchTerm.trim() === "" ? undefined : searchTerm.trim(),
+    };
 
     getMovies(params, (result) => {
       if (result && Array.isArray(result.results)) {
         const apiTotalPagesResult = Math.min(result.total_pages, maxApiPageLimit);
-        const frontendTotalPages = Math.ceil((apiTotalPagesResult * apiPageSize) / frontendPageSize);
+        const frontendTotalPages = Math.ceil(
+          (apiTotalPagesResult * apiPageSize) / frontendPageSize
+        );
 
         setTotalPages(frontendTotalPages);
         setLastApiPage(apiPage);
@@ -63,15 +89,12 @@ const Movies = ({ lang }) => {
 
   useEffect(() => {
     getMoviesReq();
-  }, [lang, currentPage, searchTerm]); // Arama veya dil veya sayfa değişince çağır
+  }, [lang, currentPage, searchTerm]);
 
-  // Search filtering artık API üzerinden yapıldığı için frontend filtreleme kaldırıldı
-  // Çünkü query parametresi API'ye gidiyor, sonuçlar ona göre geliyor
-
-  const frontendPageInApiPage = ((currentPage - 1) % (apiPageSize / frontendPageSize)) + 1;
+  const frontendPageInApiPage =
+    ((currentPage - 1) % (apiPageSize / frontendPageSize)) + 1;
   const startIndexInApiPage = (frontendPageInApiPage - 1) * frontendPageSize;
   const endIndexInApiPage = startIndexInApiPage + frontendPageSize;
-
   const visibleMovies = lastApiResults.slice(startIndexInApiPage, endIndexInApiPage);
 
   const handlePrevPage = () => {
@@ -91,11 +114,8 @@ const Movies = ({ lang }) => {
           type="text"
           className="form-control"
           placeholder="Search by name..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            changePage(1); // Arama yapınca sayfa 1'e dönsün, kullanıcı deneyimi için
-          }}
+          value={inputValue}
+          onChange={handleSearchChange}
         />
       </span>
 
@@ -106,28 +126,49 @@ const Movies = ({ lang }) => {
       <ul>
         {visibleMovies.length > 0 ? (
           visibleMovies.map((movie) => (
-            <li key={movie.id} className="list-group-item list-group-item-info films">
-              <Link to={`/movies/${movie.id}?page=${currentPage}`} className="movie-link">
+            <li
+              key={movie.id}
+              className="list-group-item list-group-item-info films"
+            >
+              <Link
+                to={`/movies/${movie.id}?page=${currentPage}`}
+                className="movie-link"
+              >
                 {movie.title || movie.original_title}
               </Link>
             </li>
           ))
         ) : (
           <li className="list-group-item">
-            <FormattedMessage id="search.noresults" defaultMessage="No movies found on this page." />
+            <FormattedMessage
+              id="search.noresults"
+              defaultMessage="No movies found on this page."
+            />
           </li>
         )}
       </ul>
 
       <div className="pagination-container">
         <div className="pagination">
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={changePage} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={changePage}
+          />
         </div>
         <div className="prev-next-buttons">
-          <button onClick={handlePrevPage} className="btn btn-secondary me-2" disabled={currentPage === 1}>
+          <button
+            onClick={handlePrevPage}
+            className="btn btn-secondary me-2"
+            disabled={currentPage === 1}
+          >
             <FormattedMessage id="page.previous" />
           </button>
-          <button onClick={handleNextPage} className="btn btn-secondary" disabled={currentPage === totalPages}>
+          <button
+            onClick={handleNextPage}
+            className="btn btn-secondary"
+            disabled={currentPage === totalPages}
+          >
             <FormattedMessage id="page.next" />
           </button>
         </div>
