@@ -1,111 +1,79 @@
 import { useEffect, useState, useMemo } from "react";
-import { FormattedMessage } from "react-intl";
-import useMoviesActions from "./useMoviesActions";
-import Pagination from "../../components/Pagination";
-import { useSearchParams, Link } from "react-router-dom";
-import Loader from "../../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchTerm } from "../../features/movies/moviesSlice";
 import { debounce } from "lodash";
+import { setSearchTerm, getMoviesThunk } from "../../features/movies/moviesSlice";
+import Pagination from "../../components/Pagination";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import Loader from "../../components/Loader";
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 const Movies = ({ lang }) => {
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.loader.isLoading);
+
+  const moviesData = useSelector((state) => state.movies.moviesData);
+  const isLoading = useSelector((state) => state.movies.isLoading);
+  const error = useSelector((state) => state.movies.error);
   const searchTerm = useSelector((state) => state.movies.searchTerm);
+  const totalPages = useSelector((state) => state.movies.totalPages);
+  const navigate = useNavigate();
+  const query = useQuery();
 
   const [inputValue, setInputValue] = useState(searchTerm);
 
-  const { getMovies } = useMoviesActions();
+  const frontendPageSize = 10;
+  const apiPageSize = 20;
 
-  const debouncedSetSearchTerm = useMemo(
-    () => debounce((val) => dispatch(setSearchTerm(val)), 500),
-    [dispatch]
-  );
+  const currentPage = Number(query.get("page")) || 1;
+  const movieId = query.get("movie");
+
+  const frontendPageInApiPage = ((currentPage - 1) % (apiPageSize / frontendPageSize)) + 1;
+  const startIndexInApiPage = (frontendPageInApiPage - 1) * frontendPageSize;
+  const endIndexInApiPage = startIndexInApiPage + frontendPageSize;
+  const visibleMovies = moviesData.slice(startIndexInApiPage, endIndexInApiPage);
 
   const handleSearchChange = (e) => {
-    const val = e.target.value;
-    setInputValue(val);
-    debouncedSetSearchTerm(val);
-    changePage(1);
+    const value = e.target.value;
+    setInputValue(value);
+    debouncedSetSearchTerm(value);
   };
 
+  const debouncedSetSearchTerm = useMemo(() =>
+    debounce((val) => {
+      const trimmed = val.trim();
+      dispatch(setSearchTerm(trimmed));
+
+      const params = new URLSearchParams();
+      params.set("page", 1);
+      navigate(`/movies?${params.toString()}`, { replace: true });
+    }, 1000), [dispatch, navigate]
+  );
   useEffect(() => {
     setInputValue(searchTerm);
   }, [searchTerm]);
 
+
   useEffect(() => {
-    return () => debouncedSetSearchTerm.cancel();
-  }, [debouncedSetSearchTerm]);
+    const apiPage = Math.floor((currentPage - 1) / 2) + 1;
 
-  const frontendPageSize = 10;
-  const apiPageSize = 20;
-  const maxApiPageLimit = 500;
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initialPage = parseInt(searchParams.get("page")) || 1;
-  const [currentPage, setCurrentPage] = useState(initialPage);
-  const [totalPages, setTotalPages] = useState(1);
-  const [lastApiPage, setLastApiPage] = useState(0);
-  const [lastApiResults, setLastApiResults] = useState([]);
-  const [apiTotalPages, setApiTotalPages] = useState(1);
-
-  const changePage = (page) => {
-    setCurrentPage(page);
-    setSearchParams({ page });
-  };
-
-  const getMoviesReq = () => {
-    const apiPage =
-      Math.floor(((currentPage - 1) * frontendPageSize) / apiPageSize) + 1;
-
-    if (apiPage > maxApiPageLimit) {
-      console.warn("API sayfa limiti aşıldı:", apiPage);
-      return;
-    }
-
-    const params = {
+    dispatch(getMoviesThunk({
       page: apiPage,
-      language: lang === "tr" ? "tr" : "en",
-      query: searchTerm.trim() === "" ? undefined : searchTerm.trim(),
-    };
+      language: lang,
+      query: searchTerm.trim()
+    }));
+  }, [dispatch, currentPage, lang, searchTerm]);
 
-    getMovies(params, (result) => {
-      if (result && Array.isArray(result.results)) {
-        const apiTotalPagesResult = Math.min(result.total_pages, maxApiPageLimit);
-        const frontendTotalPages = Math.ceil(
-          (apiTotalPagesResult * apiPageSize) / frontendPageSize
-        );
-
-        setTotalPages(frontendTotalPages);
-        setLastApiPage(apiPage);
-        setLastApiResults(result.results);
-        setApiTotalPages(apiTotalPagesResult);
-      } else {
-        setLastApiResults([]);
-        setTotalPages(1);
-      }
-    });
-  };
-
-  useEffect(() => {
-    getMoviesReq();
-  }, [lang, currentPage, searchTerm]);
-
-  const frontendPageInApiPage =
-    ((currentPage - 1) % (apiPageSize / frontendPageSize)) + 1;
-  const startIndexInApiPage = (frontendPageInApiPage - 1) * frontendPageSize;
-  const endIndexInApiPage = startIndexInApiPage + frontendPageSize;
-  const visibleMovies = lastApiResults.slice(startIndexInApiPage, endIndexInApiPage);
-
-  const handlePrevPage = () => {
-    changePage(Math.max(currentPage - 1, 1));
-  };
-
-  const handleNextPage = () => {
-    changePage(Math.min(currentPage + 1, totalPages));
+  const handlePageChange = (page) => {
+    const params = new URLSearchParams();
+    params.set("page", page);
+    navigate(`/movies?${params.toString()}`, { replace: false });
   };
 
   if (isLoading) return <Loader />;
+  if (error) return <div className="alert alert-danger">Error: {error}</div>;
 
   return (
     <div>
@@ -120,31 +88,20 @@ const Movies = ({ lang }) => {
       </span>
 
       <h2 className="header list-group-item list-group-item-danger p-3">
-        <FormattedMessage id="movies.title" />
+        <FormattedMessage id="movies.title" defaultMessage="Movies" />
       </h2>
 
       <ul>
         {visibleMovies.length > 0 ? (
           visibleMovies.map((movie) => (
-            <li
-              key={movie.id}
-              className="list-group-item list-group-item-info films"
-            >
-              <Link
-                to={`/movies/${movie.id}?page=${currentPage}`}
-                className="movie-link"
-              >
+            <li key={movie.id} className="list-group-item list-group-item-info films">
+              <Link to={`/movies/page/${currentPage}/movie/${movie.id}`} className="movie-link">
                 {movie.title || movie.original_title}
               </Link>
             </li>
           ))
         ) : (
-          <li className="list-group-item">
-            <FormattedMessage
-              id="search.noresults"
-              defaultMessage="No movies found on this page."
-            />
-          </li>
+          <li className="list-group-item">No movies found on this page.</li>
         )}
       </ul>
 
@@ -153,23 +110,23 @@ const Movies = ({ lang }) => {
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={changePage}
+            onPageChange={handlePageChange}
           />
         </div>
         <div className="prev-next-buttons">
           <button
-            onClick={handlePrevPage}
+            onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
             className="btn btn-secondary me-2"
             disabled={currentPage === 1}
           >
-            <FormattedMessage id="page.previous" />
+            <FormattedMessage id="page.previous" defaultMessage="Previous" />
           </button>
           <button
-            onClick={handleNextPage}
+            onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
             className="btn btn-secondary"
             disabled={currentPage === totalPages}
           >
-            <FormattedMessage id="page.next" />
+            <FormattedMessage id="page.next" defaultMessage="Next" />
           </button>
         </div>
       </div>

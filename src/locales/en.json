@@ -7,7 +7,6 @@
   "about.title": "About Me",
   "movies.title": "Favorite Movies",
   "contact.title": "Contact",
-  "moviesRedux.title": "Favorite Movies Redux",
 
   "contact.name": "Name",
   "contact.email": "E-mail",
@@ -21,7 +20,5 @@
   "notfound.message": "Page not found.",
 
   "movieDetail.releaseDate": "Release Date",
-  "movieDetail.voteAverage": "Vote Average",
-  "movieDetail.noOverview": "No overview available.",
-  "button.backToMovies": "Back To Movies"
+  "movieDetail.voteAverage": "Vote Average"
 }

@@ -7,7 +7,6 @@
   "about.title": "Hakkımda",
   "movies.title": "Sevdiğim Filmler",
   "contact.title": "İletişim",
-  "moviesRedux.title": "Sevdiğim Filmler Redux",
 
   "contact.name": "İsim",
   "contact.email": "E-posta",
@@ -21,7 +20,5 @@
   "notfound.message": "Aradığınız sayfa bulunamadı.",
 
   "movieDetail.releaseDate": "Çıkış Tarihi",
-  "movieDetail.voteAverage": "Oy Ortalaması",
-  "movieDetail.noOverview": "Açıklama bulunamadı.",
-  "button.backToMovies": "Filmlere Dön"
+  "movieDetail.voteAverage": "Oy Ortalaması"
 }

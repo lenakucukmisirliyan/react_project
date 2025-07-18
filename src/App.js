@@ -16,6 +16,7 @@ const routeList = {
 };
 
 const App = ({ lang }) => {
+
   return (
     <div className="app-container">
 
@@ -33,7 +34,8 @@ const App = ({ lang }) => {
             />
           );
         })}
-        <Route path="/movies/:id" element={<MovieDetail lang={lang} />} />
+        <Route path="/movies/page/:page" element={<Movies lang={lang} />} />
+        <Route path="/movies/page/:page/movie/:id" element={<MovieDetail lang={lang} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

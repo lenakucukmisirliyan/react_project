@@ -1,45 +1,38 @@
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import { FormattedMessage } from "react-intl";
-import { API_KEY } from "../../constants";
 import backButtonIcon from "../../assets/back_button.png";
+import { fetchMovieDetail, clearMovieDetail } from "../../features/movieDetail/movieDetailSlice";
 
 const MovieDetail = ({ lang }) => {
-    const { id } = useParams();
-    const [movie, setMovie] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
 
-    const previousPage = searchParams.get("page") || 1;
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const query = new URLSearchParams(location.search);
+    const movieId = Number(query.get("movieId"));
+    const page = Number(query.get("page")) || 1;
+
+    const { movie, loading, error } = useSelector((state) => state.movieDetail);
 
     useEffect(() => {
-        const fetchMovie = async () => {
-            try {
-                const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
-                    params: {
-                        api_key: API_KEY,
-                        language: lang === "tr" ? "tr-TR" : "en-US",
-                    },
-                });
-                setMovie(res.data);
-            } catch (error) {
-                console.error("Detay alınamadı:", error);
-            } finally {
-                setLoading(false);
-            }
+        if (movieId) {
+            dispatch(fetchMovieDetail({ id: movieId, lang }));
+        }
+        return () => {
+            dispatch(clearMovieDetail());
         };
-
-        fetchMovie();
-    }, [id, lang]);
+    }, [movieId, lang, dispatch]);
 
     if (loading) return <Loader />;
-    if (!movie) return <p><FormattedMessage id="search.noresults"/></p>;
+    if (error) return <p>Error: {error}</p>;
+    if (!movie) return <p><FormattedMessage id="search.noresults" /></p>;
 
     const backToMovies = () => {
-        navigate(`/movies?page=${previousPage}`);
+        navigate(`/movies?page=${page}`, { replace: true });
     };
 
     return (
@@ -63,15 +56,8 @@ const MovieDetail = ({ lang }) => {
                     <p>
                         <strong><FormattedMessage id="movieDetail.voteAverage" />:</strong> {movie.vote_average}
                     </p>
-                    <button
-                        onClick={backToMovies}
-                        className="back-button"
-                    >
-                        <img
-                            src={backButtonIcon}
-                            alt="Back"
-                            className="back-button-img"
-                        />
+                    <button onClick={backToMovies} className="back-button">
+                        <img src={backButtonIcon} alt="Back" className="back-button-img" />
                     </button>
                 </div>
             </div>
