@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash";
 import { setSearchTerm, getMoviesThunk } from "../../features/movies/moviesSlice";
@@ -20,9 +20,11 @@ const Movies = ({ lang }) => {
   const searchTerm = useSelector((state) => state.movies.searchTerm);
   const totalPages = useSelector((state) => state.movies.totalPages);
   const navigate = useNavigate();
+  const location = useLocation();
   const query = useQuery();
 
   const [inputValue, setInputValue] = useState(searchTerm);
+  const [shouldFocus, setShouldFocus] = useState(false);
 
   const frontendPageSize = 10;
   const apiPageSize = 20;
@@ -35,13 +37,9 @@ const Movies = ({ lang }) => {
   const endIndexInApiPage = startIndexInApiPage + frontendPageSize;
   const visibleMovies = moviesData.slice(startIndexInApiPage, endIndexInApiPage);
 
-  const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-    debouncedSetSearchTerm(value);
-  };
+  const inputRef = useRef(null);
 
-  const debouncedSetSearchTerm = useMemo(() =>
+  const debouncedSetSearchTerm = useCallback(
     debounce((val) => {
       const trimmed = val.trim();
       dispatch(setSearchTerm(trimmed));
@@ -49,12 +47,34 @@ const Movies = ({ lang }) => {
       const params = new URLSearchParams();
       params.set("page", 1);
       navigate(`/movies?${params.toString()}`, { replace: true });
-    }, 1000), [dispatch, navigate]
+
+      setShouldFocus(true);
+    }, 1000),
+    [dispatch, navigate]
   );
+
+  useEffect(() => {
+    return () => {
+      debouncedSetSearchTerm.cancel();
+    };
+  }, [debouncedSetSearchTerm]);
+
+  useEffect(() => {
+    if (inputRef.current && shouldFocus) {
+      inputRef.current.focus();
+      setShouldFocus(false);
+    }
+  }, [location.key, shouldFocus]);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    debouncedSetSearchTerm(value);
+  };
+
   useEffect(() => {
     setInputValue(searchTerm);
   }, [searchTerm]);
-
 
   useEffect(() => {
     const apiPage = Math.floor((currentPage - 1) / 2) + 1;
@@ -79,6 +99,7 @@ const Movies = ({ lang }) => {
     <div>
       <span className="search-box">
         <input
+          ref={inputRef}
           type="text"
           className="form-control"
           placeholder="Search by name..."
@@ -95,7 +116,7 @@ const Movies = ({ lang }) => {
         {visibleMovies.length > 0 ? (
           visibleMovies.map((movie) => (
             <li key={movie.id} className="list-group-item list-group-item-info films">
-              <Link to={`/movies/page/${currentPage}/movie/${movie.id}`} className="movie-link">
+              <Link to={`/movies/movie?page=${currentPage}&movie=${movie.id}`} className="movie-link">
                 {movie.title || movie.original_title}
               </Link>
             </li>

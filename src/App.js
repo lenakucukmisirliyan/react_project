@@ -15,12 +15,11 @@ const routeList = {
   [PAGE_ID_LIST.CONTACT]: Contact,
 };
 
-const App = ({ lang }) => {
+const App = ({ lang, setLocale }) => {
 
   return (
     <div className="app-container">
-
-      <Menu lang={lang} />
+      <Menu lang={lang} setLocale={setLocale} />
       <Loader />
       <Routes>
         <Route path="/" element={<Navigate to="/about-me" replace />} />
@@ -35,7 +34,7 @@ const App = ({ lang }) => {
           );
         })}
         <Route path="/movies/page/:page" element={<Movies lang={lang} />} />
-        <Route path="/movies/page/:page/movie/:id" element={<MovieDetail lang={lang} />} />
+        <Route path="/movies/movie" element={<MovieDetail lang={lang} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

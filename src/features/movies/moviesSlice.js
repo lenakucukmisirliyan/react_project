@@ -5,7 +5,6 @@ import { API_KEY } from "../../constants";
 const initialState = {
   moviesData: [],
   searchTerm: "",
-  cacheByPage: {},
   isLoading: false,
   error: null,
   currentPage: 1,
@@ -14,21 +13,8 @@ const initialState = {
 
 export const getMoviesThunk = createAsyncThunk(
   "movies/fetchMovies",
-  async ({ page, language, query }, { getState, rejectWithValue }) => {
-    const { movies } = getState();
-    const cachedLang = movies.cacheByPage[language];
-    const cachedResults = cachedLang?.[page];
+  async ({ page, language, query }, { rejectWithValue }) => {
     const isSearching = !!query?.trim();
-
-    // SORUN MUHTEMELEN BURADA
-    if (!isSearching && cachedResults) {
-      return {
-        page,
-        results: cachedResults,
-        total_pages: movies.totalPages,
-        fromCache: true,
-      };
-    }
 
     try {
       const url = isSearching
@@ -48,7 +34,6 @@ export const getMoviesThunk = createAsyncThunk(
         page,
         results: response.data.results,
         total_pages: response.data.total_pages,
-        fromCache: false,
       };
     } catch (error) {
       return rejectWithValue(error.message || "Something went wrong");
@@ -62,6 +47,7 @@ const moviesSlice = createSlice({
   reducers: {
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
+      state.currentPage = 1; // Arama değişince sayfa sıfırlansın
     },
   },
   extraReducers: (builder) => {
@@ -71,21 +57,13 @@ const moviesSlice = createSlice({
         state.error = null;
       })
       .addCase(getMoviesThunk.fulfilled, (state, action) => {
-        const { page, results, total_pages, fromCache } = action.payload;
-        const currentLang = action.meta.arg.language;
+        const { results, total_pages } = action.payload;
 
         state.isLoading = false;
         state.moviesData = results;
         state.error = null;
 
-        if (!fromCache) {
-          if (!state.cacheByPage[currentLang]) {
-            state.cacheByPage[currentLang] = {};
-          }
-          state.cacheByPage[currentLang][page] = results;
-        }
-
-        if (!fromCache && total_pages) {
+        if (total_pages) {
           const frontendPageSize = 10;
           const apiPageSize = 20;
           const maxApiPages = 500;

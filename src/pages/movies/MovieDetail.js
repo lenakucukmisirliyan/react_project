@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
@@ -13,8 +13,8 @@ const MovieDetail = ({ lang }) => {
     const navigate = useNavigate();
 
     const query = new URLSearchParams(location.search);
-    const movieId = Number(query.get("movieId"));
     const page = Number(query.get("page")) || 1;
+    const movieId = Number(query.get("movie"));
 
     const { movie, loading, error } = useSelector((state) => state.movieDetail);
 

@@ -5,11 +5,17 @@ const LanguageSwitcher = ({ locale, setLocale }) => {
   };
 
   return (
-    <div className='switch-button'>
-      <button className="btn btn-danger" onClick={() => changeLocale('tr')}>
+    <div className="switch-button">
+      <button
+        className={`btn-danger ${locale === 'tr' ? 'active' : ''}`}
+        onClick={() => changeLocale('tr')}
+      >
         Türkçe
       </button>
-      <button className="btn btn-primary" onClick={() => changeLocale('en')}>
+      <button
+        className={`btn-primary ${locale === 'en' ? 'active' : ''}`}
+        onClick={() => changeLocale('en')}
+      >
         English
       </button>
     </div>
