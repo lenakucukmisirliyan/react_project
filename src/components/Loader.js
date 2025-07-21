@@ -8,7 +8,10 @@ const Loader = () => {
 
   return (
     <div className="loader-backdrop">
-      <img src={epiasLogo} alt="Yükleniyor" className="loader-image"/>
+      <img 
+      src={epiasLogo} 
+      alt="Loading..." 
+      className="loader-image"/>
     </div>
   );
 };

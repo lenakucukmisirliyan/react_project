@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { store } from './app/store';
 import App from './App';
-import LanguageSwitcher from './locales/LanguageSwitcher';
-import ThemeSwitcher from './components/ThemeSwitcher';
 import { messages } from './constants';
 import './styles/main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';

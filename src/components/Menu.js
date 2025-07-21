@@ -12,10 +12,9 @@ const Menu = ({ lang, setLocale }) => {
             <li key={item.id} className="nav-item">
               <NavLink
                 to={item.url}
-                className="nav-link fw-bold"
-                style={({ isActive }) => ({
-                  color: isActive ? 'blue' : 'black',
-                })}
+                className={({ isActive }) =>
+                  isActive ? "nav-link fw-bold text-primary" : "nav-link fw-bold text-dark"
+                }
               >
                 {item.label[lang]}
               </NavLink>

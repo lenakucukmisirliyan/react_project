@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
-import { loaderActive, loaderPasive } from "../features/loader/loaderSlice";
+import { loaderActive, loaderPassive } from "../features/loader/loaderSlice";
 
 const usePageLoader = () => {
   const dispatch = useDispatch();
 
   const showPageLoader = () => dispatch(loaderActive());
-  const hidePageLoader = () => dispatch(loaderPasive());
+  const hidePageLoader = () => dispatch(loaderPassive());
 
   return { showPageLoader, hidePageLoader };
 };

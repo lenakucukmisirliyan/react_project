@@ -9,11 +9,11 @@ const loaderSlice = createSlice({
     loaderActive: (state) => {
       state.isLoading = true;
     },
-    loaderPasive: (state) => {
+    loaderPassive: (state) => {
       state.isLoading = false;
     },
   },
 });
 
-export const { loaderActive, loaderPasive } = loaderSlice.actions;
+export const { loaderActive, loaderPassive } = loaderSlice.actions;
 export default loaderSlice.reducer;

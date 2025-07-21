@@ -4,12 +4,13 @@ import loaderReducer from '../../features/loader/loaderSlice';
 import contactReducer from '../../features/contact/contactSlice';
 import movieDetailReducer from "../../features/movieDetail/movieDetailSlice";
 
-export const store = configureStore({
-  reducer: {
-    movies: moviesReducer,
-    loader: loaderReducer,
-    contact: contactReducer,
-    movieDetail: movieDetailReducer,
-  },
-});
+const reducer = {
+  movies: moviesReducer,
+  loader: loaderReducer,
+  contact: contactReducer,
+  movieDetail: movieDetailReducer,
+};
 
+export const store = configureStore({
+  reducer,
+});
