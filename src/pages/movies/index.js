@@ -20,11 +20,9 @@ const Movies = ({ lang }) => {
   const searchTerm = useSelector((state) => state.movies.searchTerm);
   const totalPages = useSelector((state) => state.movies.totalPages);
   const navigate = useNavigate();
-  const location = useLocation();
   const query = useQuery();
 
   const [inputValue, setInputValue] = useState(searchTerm);
-  const [shouldFocus, setShouldFocus] = useState(false);
 
   const frontendPageSize = 10;
   const apiPageSize = 20;
@@ -60,11 +58,10 @@ const Movies = ({ lang }) => {
   }, [debouncedSetSearchTerm]);
 
   useEffect(() => {
-    if (inputRef.current && shouldFocus) {
+    if (inputRef.current) {
       inputRef.current.focus();
-      setShouldFocus(false);
     }
-  }, [location.key, shouldFocus]);
+  });
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
