@@ -8,34 +8,32 @@ import { FormattedMessage } from "react-intl";
 import Loader from "../../components/Loader";
 
 const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
+  const location = useLocation();
+  return new URLSearchParams(location.search);
 };
 
 const Movies = ({ lang }) => {
+  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const query = useQuery();
 
   const moviesData = useSelector((state) => state.movies.moviesData);
   const isLoading = useSelector((state) => state.movies.isLoading);
   const error = useSelector((state) => state.movies.error);
   const searchTerm = useSelector((state) => state.movies.searchTerm);
   const totalPages = useSelector((state) => state.movies.totalPages);
-  const navigate = useNavigate();
-  const query = useQuery();
+  const inputRef = useRef(null);
 
   const [inputValue, setInputValue] = useState(searchTerm);
 
   const frontendPageSize = 10;
   const apiPageSize = 20;
-
   const currentPage = Number(query.get("page")) || 1;
-  const movieId = query.get("movie");
-
   const frontendPageInApiPage = ((currentPage - 1) % (apiPageSize / frontendPageSize)) + 1;
   const startIndexInApiPage = (frontendPageInApiPage - 1) * frontendPageSize;
   const endIndexInApiPage = startIndexInApiPage + frontendPageSize;
   const visibleMovies = moviesData.slice(startIndexInApiPage, endIndexInApiPage);
-
-  const inputRef = useRef(null);
 
   const debouncedSetSearchTerm = useCallback(
     debounce((val) => {
@@ -46,15 +44,14 @@ const Movies = ({ lang }) => {
       params.set("page", 1);
       navigate(`/movies?${params.toString()}`, { replace: true });
 
-      setShouldFocus(true);
     }, 1000),
     [dispatch, navigate]
   );
 
   useEffect(() => {
     return () => {
-      debouncedSetSearchTerm.cancel();
-    };
+      debouncedSetSearchTerm.cancel();  //Component unmount edilirken veya bu debounce fonksiyon değişirken,
+    };                                  //cancel() çağrısı ile bekleyen henüz çalışmamış çağrılar iptal edilir.
   }, [debouncedSetSearchTerm]);
 
   useEffect(() => {
