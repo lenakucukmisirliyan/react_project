@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash";
 import { setSearchTerm, getMoviesThunk } from "../../features/movies/moviesSlice";
@@ -13,18 +13,20 @@ const useQuery = () => {
 };
 
 const Movies = ({ lang }) => {
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const query = useQuery();
 
-  const moviesData = useSelector((state) => state.movies.moviesData);
-  const isLoading = useSelector((state) => state.movies.isLoading);
-  const error = useSelector((state) => state.movies.error);
-  const searchTerm = useSelector((state) => state.movies.searchTerm);
-  const totalPages = useSelector((state) => state.movies.totalPages);
-  const inputRef = useRef(null);
+  const {
+    moviesData,
+    isLoading,
+    error,
+    searchTerm,
+    totalPages
+  } = useSelector((state) => state.movies);
 
+  const inputRef = useRef(null);
   const [inputValue, setInputValue] = useState(searchTerm);
 
   const frontendPageSize = 10;
@@ -33,7 +35,9 @@ const Movies = ({ lang }) => {
   const frontendPageInApiPage = ((currentPage - 1) % (apiPageSize / frontendPageSize)) + 1;
   const startIndexInApiPage = (frontendPageInApiPage - 1) * frontendPageSize;
   const endIndexInApiPage = startIndexInApiPage + frontendPageSize;
-  const visibleMovies = moviesData.slice(startIndexInApiPage, endIndexInApiPage);
+  const visibleMovies = useMemo(() => {
+    return moviesData.slice(startIndexInApiPage, endIndexInApiPage);
+  }, [moviesData, startIndexInApiPage, endIndexInApiPage]);
 
   const debouncedSetSearchTerm = useCallback(
     debounce((val) => {
@@ -58,7 +62,7 @@ const Movies = ({ lang }) => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  });
+  },);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;

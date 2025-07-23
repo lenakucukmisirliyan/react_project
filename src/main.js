@@ -19,11 +19,6 @@ const Root = () => {
     }
   }, []);
 
-  const handleLocaleChange = (newLocale) => {
-    setLocale(newLocale);
-    localStorage.setItem("appLocale", newLocale);
-  };
-
   return (
     <Provider store={store}>
       <BrowserRouter>

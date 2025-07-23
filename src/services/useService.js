@@ -6,6 +6,10 @@ const useService = () => {
   const { showPageLoader, hidePageLoader } = usePageLoader();
 
   const serviceCall = async ({ url, method = METHOD.GET, params, data, headers = {} }) => {
+    if (!url) {
+      console.error('API Error: URL is required');
+      return null;
+    }
     try {
       showPageLoader();
 

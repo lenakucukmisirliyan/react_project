@@ -6,25 +6,18 @@ export const getPaginationItems = (currentPage, totalPages) => {
         for (let i = 1; i <= maxPage; i++) {
             pages.push(i);
         }
-    } else {
-        pages.push(1);  // İlk sayfayı her zaman göster
-
-        if (currentPage > 4) {  // 5. sayfadan itibaren araya ... koy
-            pages.push("...");
-        }
-
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-            if (i > 1 && i < maxPage) { // 1'den büyük son sayfa sayısından küçükse sayfayı aç
-                pages.push(i);
-            }
-        }
-
-        if (currentPage < maxPage - 3) {  // Son sayfaya 3'ten daha uzaksa ... koy
-            pages.push("...");
-        }
-
-        pages.push(maxPage);  // Son sayfayı her zaman göster
+        return pages;
     }
+    pages.push(1);  // İlk sayfayı her zaman göster
 
-    return pages;
-};
+    if (currentPage > 4) pages.push("...");  // 5. sayfadan itibaren araya ... koy
+
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(maxPage - 1, currentPage + 1); i++) {
+        pages.push(i);
+    }
+    if (currentPage < maxPage - 3) pages.push("...");  // Son sayfaya 3'ten daha uzaksa ... koy
+    
+    pages.push(maxPage)
+    
+    return pages;  // Son sayfayı her zaman göster
+}; 

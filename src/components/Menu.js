@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { MENU_ITEMS } from "../constants/index";
-import LanguageSwitcher from '../locales/LanguageSwitcher'; // yolu kendi dosya yapına göre kontrol et
+import LanguageSwitcher from '../locales/LanguageSwitcher';
 import ThemeSwitcher from './ThemeSwitcher';
 
 const Menu = ({ lang, setLocale }) => {
