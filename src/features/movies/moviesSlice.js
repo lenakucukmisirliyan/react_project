@@ -14,7 +14,7 @@ const initialState = {
 export const getMoviesThunk = createAsyncThunk(
   "movies/fetchMovies",
   async ({ page, language, query }, { rejectWithValue }) => {
-    const isSearching = !!query?.trim();
+    const isSearching = !!query?.trim();  // !! -> boolean’a çevirir
 
     try {
       const url = isSearching

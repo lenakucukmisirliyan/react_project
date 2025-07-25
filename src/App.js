@@ -8,10 +8,12 @@ import './styles/main.scss';
 import Loader from './components/Loader';
 import NotFound from './pages/NotFound';
 import MovieDetail from './pages/movies/MovieDetail';
+import Books from './pages/books';
 
 const routeList = {
   [PAGE_ID_LIST.ABOUT]: About,
   [PAGE_ID_LIST.MOVIES]: Movies,
+  [PAGE_ID_LIST.BOOKS]: Books,
   [PAGE_ID_LIST.CONTACT]: Contact,
 };
 
@@ -35,6 +37,7 @@ const App = ({ lang, setLocale }) => {
         })}
         <Route path="/movies/page/:page" element={<Movies lang={lang} />} />
         <Route path="/movies/movie" element={<MovieDetail lang={lang} />} />
+        <Route path="/books" element={<Books />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

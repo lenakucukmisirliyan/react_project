@@ -29,6 +29,10 @@ export const apiConfigs = {
       url: 'https://jsonplaceholder.typicode.com/posts', // Sahte API
     },
   },
+  books: {
+    method: METHOD.GET,
+    url: 'https://www.googleapis.com/books/v1/volumes',
+  }
 };
 
 export default axiosInstance;

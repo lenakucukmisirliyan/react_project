@@ -1,0 +1,45 @@
+$card-bg-color: #c4f9d8d7;
+$btn-font-size: 1rem;
+$btn-padding: 5px 5px;
+$btn-width: 110px;
+$btn-radius: 8px;
+
+.card {
+  max-width: 250px;
+  font-size: 0.9rem;
+  margin: 0;
+  height: 100px;
+  padding: 25px;
+  background-color: $card-bg-color !important;
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+
+    .card-title {
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .btn-primary {
+      font-size: $btn-font-size;
+      padding: $btn-padding;
+      border-radius: $btn-radius;
+      width: $btn-width;
+      text-align: center;
+    }
+  }
+
+  .card-img-top {
+    height: 220px;
+    padding-top: 15px;
+    object-fit: contain;
+  }
+}

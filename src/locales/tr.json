@@ -1,12 +1,13 @@
 {
   "menu.1": "Hakkımda",
   "menu.2": "Sevdiğim Filmler",
-  "menu.3": "İletişim",
-  "menu.4": "Sevdiğim Filmler Redux",
+  "menu.4": "İletişim",
+  "menu.3": "Kitaplar",
   
   "about.title": "Hakkımda",
   "movies.title": "Sevdiğim Filmler",
   "contact.title": "İletişim",
+  "books.title": "Kitaplar",
 
   "contact.name": "İsim",
   "contact.email": "E-posta",
@@ -20,5 +21,10 @@
   "notfound.message": "Aradığınız sayfa bulunamadı.",
 
   "movieDetail.releaseDate": "Çıkış Tarihi",
-  "movieDetail.voteAverage": "Oy Ortalaması"
+  "movieDetail.voteAverage": "Oy Ortalaması",
+
+  "books.noResults": "Kitap Bulunamadı",
+  "books.viewDetails": "İncele",
+  "books.authors": "Yazarlar",
+  "books.unknownAuthor": "Bilinmeyen Yazar"
 }
