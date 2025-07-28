@@ -3,20 +3,30 @@ import axios from "axios";
 
 export const fetchBooks = createAsyncThunk(
     "books/fetchBooks",
-    async ( { query, lang }, thunkAPI) => {
-        const response = await axios.get (
-            `https://www.googleapis.com/books/v1/volumes?q=${query}&langRestrict=${lang}`
+    async ({ query, lang, page = 1 }, thunkAPI) => {
+        const startIndex = (page - 1) * 20;
+        const response = await axios.get(
+            `https://www.googleapis.com/books/v1/volumes`,
+            {
+                params: {
+                    q: query,
+                    langRestrict: lang,
+                    startIndex,
+                    maxResults: 20,
+                }
+            }
         );
-        return response.data.items;
+        return response.data.items || [];
     }
 )
 
-const booksSlice = createSlice ({
+const booksSlice = createSlice({
     name: "books",
     initialState: {
         books: [],
         status: "idle",  // Henüz hiçbir istek yapılmadı anlamında
         error: null,
+        hasMore: true
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -26,7 +36,13 @@ const booksSlice = createSlice ({
             })
             .addCase(fetchBooks.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.books = action.payload;
+                const isFirstPage = action.meta.arg.page === 1;  // createAsyncThunk’a gönderdiğimiz parametredeki page'i alıyor
+                const newBooks = action.payload;
+
+                state.books = isFirstPage
+                    ? newBooks                  // Eğer bu 1. sayfa ise önceki kitapları sil sadece yenileri koy
+                    : [...state.books, ...newBooks]; // Eğer bu bir scroll ile gelen 2., 3. sayfa gibi bir şeyse öncekilere ekle
+                state.hasMore = newBooks.length > 0;
             })
             .addCase(fetchBooks.rejected, (state, action) => {
                 state.status = "failed";
