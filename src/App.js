@@ -9,6 +9,7 @@ import Loader from './components/Loader';
 import NotFound from './pages/NotFound';
 import MovieDetail from './pages/movies/MovieDetail';
 import Books from './pages/books';
+import DummyChat from './components/DummyChat';
 
 const routeList = {
   [PAGE_ID_LIST.ABOUT]: About,
@@ -40,6 +41,7 @@ const App = ({ lang, setLocale }) => {
         <Route path="/books" element={<Books />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <DummyChat />
     </div>
   );
 };

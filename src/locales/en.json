@@ -26,5 +26,6 @@
   "books.noResults": "No books found",
   "books.viewDetails": "View",
   "books.authors": "Authors",
-  "books.unknownAuthor": "Unknown Author"
+  "books.unknownAuthor": "Unknown Author",
+  "books.noMoreResults": "All books uploaded."
 }

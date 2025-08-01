@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBooks } from '../../features/books/booksSlice';
-import './Books.scss';
+import '../../styles/pages/_books.scss';
 import { useIntl, FormattedMessage } from 'react-intl';
 import Loader from '../../components/Loader';
 import usePageLoader from '../../utils/usePageLoader';
@@ -21,7 +21,7 @@ const Books = () => {
         const loadData = async () => {
             try {
                 showPageLoader();
-                await dispatch(fetchBooks({ query: 'react', lang: currentLang, page })).unwrap();
+                await dispatch(fetchBooks({ query : 'react', lang: currentLang, page })).unwrap();   // .unwrap() → Hata varsa try/catch’e düşmesini sağlar.
             } catch (err) {
                 console.error("Kitapları çekerken hata:", err);
             } finally {
@@ -109,7 +109,7 @@ const Books = () => {
                     backgroundColor: 'red',
                     marginTop: '10px',
                 }}
-            ></div>
+            />
         </div>
     );
 };

@@ -26,5 +26,6 @@
   "books.noResults": "Kitap Bulunamadı",
   "books.viewDetails": "İncele",
   "books.authors": "Yazarlar",
-  "books.unknownAuthor": "Bilinmeyen Yazar"
+  "books.unknownAuthor": "Bilinmeyen Yazar",
+  "books.noMoreResults": "Tüm kitaplar yüklendi."
 }

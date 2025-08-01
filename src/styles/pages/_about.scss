@@ -1,0 +1,22 @@
+.about-paper {
+  background-image: url('/src/assets/paper-texture.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  font-family: $font-mono;
+  color: #5b4636;
+  margin-top: 50px;
+
+  h2 {
+    margin: 25px;
+    padding: 40px;
+    color: black;
+  }
+
+  p {
+    color: black;
+  }
+}

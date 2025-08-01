@@ -1,0 +1,18 @@
+.movie-poster {
+  width: 250px;
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.movie-link {
+  text-decoration: none;
+}
+
+.films {
+  width: 50%;
+  position: relative;
+  padding-left: 1.2em;
+  margin: 0 auto 1px auto;
+}

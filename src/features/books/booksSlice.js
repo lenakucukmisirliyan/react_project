@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchBooks = createAsyncThunk(
     "books/fetchBooks",
-    async ({ query, lang, page = 1 }, thunkAPI) => {
+    async ({ query, lang, page = 1 }) => {
         const startIndex = (page - 1) * 20;
         const response = await axios.get(
             `https://www.googleapis.com/books/v1/volumes`,
