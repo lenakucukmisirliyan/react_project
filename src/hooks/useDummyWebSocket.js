@@ -9,22 +9,20 @@ export function useDummyWebSocket(interval=3000) {
     useEffect(() => {
         socketRef.current = {
             send: (msg) => {
-                console.log("Kullanıcı mesajı gönderdi: ", msg);
-                setMessages((prev) => [...prev, { form: "user", text: msg }]);
+                setMessages((prev) => [...prev, { from: "user", text: msg }]);
             },
             close: () => {
                 clearInterval(timerRef.current);
-                console.log("Dummy WebSocket kapandı");
             },
         };
 
         timerRef.current = setInterval(() => {
             const msg = generateDummyMessages();
-            setMessages((prev) => [...prev, {form: "server", text: msg }]);
+            setMessages((prev) => [...prev, {from: "server", text: msg }]);
         }, interval);
 
         return () => {
-            socketRef.current.close();
+            socketRef.current.close();  // memory leak olmasın diye
         };
     }, [interval]);
     return {

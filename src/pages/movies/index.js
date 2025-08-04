@@ -6,7 +6,6 @@ import Pagination from "../../components/Pagination";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import Loader from "../../components/Loader";
-import usePageLoader from '../../utils/usePageLoader';
 
 const useQuery = () => {
   const location = useLocation();

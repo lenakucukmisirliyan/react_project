@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../services/api";
 import { API_KEY } from "../../constants";
-import axios from "axios";
 
 const initialState = {
   moviesData: [],
