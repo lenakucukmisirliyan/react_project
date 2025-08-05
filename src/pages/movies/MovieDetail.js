@@ -50,10 +50,10 @@ const MovieDetail = ({ lang }) => {
                 <div className="col-md-8">
                     <h2>{movie.title || movie.original_title}</h2>
                     <p>{movie.overview || "Açıklama yok."}</p>
-                    <p>
+                    <p className="color-text-dark">
                         <strong><FormattedMessage id="movieDetail.releaseDate" />:</strong> {movie.release_date}
                     </p>
-                    <p>
+                    <p className="color-text-dark">
                         <strong><FormattedMessage id="movieDetail.voteAverage" />:</strong> {movie.vote_average}
                     </p>
                     <button onClick={backToMovies} className="back-button">
