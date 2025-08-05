@@ -2,6 +2,7 @@
 
 button {
   font-family: inherit;
+  margin: 2px !important;
   font-size: 1em;
   font-weight: 500;
   cursor: pointer;
@@ -33,5 +34,6 @@ button {
 
 .back-button-img {
   width: 100px;
+  height: 40px;
   display: inline-block
 }

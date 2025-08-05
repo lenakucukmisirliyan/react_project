@@ -94,20 +94,22 @@ const Movies = ({ lang }) => {
 
   return (
     <div>
-      <span className="search-box">
-        <input
-          ref={inputRef}
-          type="text"
-          className="form-control"
-          placeholder="Search by name..."
-          value={inputValue}
-          onChange={handleSearchChange}
-        />
-      </span>
+      <div className="films-header">
+        <h2 className="list-group-item list-group-item-danger p-3 page-title">
+          <FormattedMessage id="movies.title" defaultMessage="Movies" />
+        </h2>
+        <div className="search-box">
+          <input
+            ref={inputRef}
+            type="text"
+            className="form-control"
+            placeholder="Search by name..."
+            value={inputValue}
+            onChange={handleSearchChange}
+          />
+        </div>
 
-      <h2 className="header list-group-item list-group-item-danger p-3">
-        <FormattedMessage id="movies.title" defaultMessage="Movies" />
-      </h2>
+      </div>
 
       <ul>
         {visibleMovies.length > 0 ? (

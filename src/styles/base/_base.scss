@@ -29,11 +29,13 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  overflow-y: scroll;
+  overflow-y: visible;
   color: var(--text-color);
   font-family: $font-main;
   background-color: #fcf3f1 !important;
-  padding-top: 0px;
+  padding: 0px;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif;
 }
 
 h1 {
@@ -57,19 +59,21 @@ h1 {
 }
 
 .app-container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
   min-height: 100vh;
   box-sizing: border-box;
   width: 100%;
+  overflow: visible !important;
 }
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  margin: auto;
+  padding: 0rem;
+  padding-top: 20px;
   text-align: center;
+  overflow: visible !important;
 }
 
 .menu {
@@ -79,6 +83,9 @@ h1 {
   margin: 0 auto 10px auto;
   text-align: center;
   position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 input,
@@ -101,6 +108,6 @@ textarea {
 .header {
   font-size: 40px;
   width: 50%;
-  margin: 0 auto 10px 305px;
+  margin: 0 auto;
   text-align: center;
 }

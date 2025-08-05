@@ -1,22 +1,31 @@
-.about-paper {
-  background-image: url('/src/assets/paper-texture.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  font-family: $font-mono;
-  color: #5b4636;
-  margin-top: 50px;
+.about-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
 
-  h2 {
-    margin: 25px;
-    padding: 40px;
-    color: black;
+  .about-photo {
+    flex-shrink: 0;
+    width: 300px;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
   }
 
-  p {
-    color: black;
+  .about-content {
+    flex: 1;
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .typewriter {
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
   }
 }

@@ -10,13 +10,13 @@ const LanguageSwitcher = ({ locale, setLocale }) => {
         className={`btn btn-danger ${locale === 'tr' ? 'active' : ''}`}
         onClick={() => changeLocale('tr')}
       >
-        Türkçe
+        TR
       </button>
       <button
         className={`btn btn-primary ${locale === 'en' ? 'active' : ''}`}
         onClick={() => changeLocale('en')}
       >
-        English
+        EN
       </button>
     </div>
   );

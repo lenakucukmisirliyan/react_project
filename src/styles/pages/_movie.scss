@@ -15,4 +15,28 @@
   position: relative;
   padding-left: 1.2em;
   margin: 0 auto 1px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+ul {
+  padding-left: 0 !important;
+}
+
+.films-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.page-title {
+  width: 52.5%;
+  font-size: 2rem;
+  text-align: center;
 }

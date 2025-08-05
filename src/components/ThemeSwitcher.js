@@ -13,13 +13,11 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="btn btn-outline-secondary btn-sm"
-      aria-label="Toggle theme"
-    >
-      {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-    </button>
+    <div className="theme-switcher" onClick={toggleTheme}>
+      <div className={`switch ${theme === "dark" ? "switch-dark" : "switch-light"}`}>
+        <div className="thumb" />
+      </div>
+    </div>
   );
 };
 
