@@ -2,15 +2,13 @@ import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBooks, setSortedBooks } from '../../features/books/booksSlice';
 import '../../styles/pages/_books.scss';
-import { useIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Loader from '../../components/Loader';
 import usePageLoader from '../../utils/usePageLoader';
 import BooksFilters from "../../components/BooksFilters";
 
 
 const Books = () => {
-    const intl = useIntl();
-    const currentLang = intl.locale;
     const dispatch = useDispatch();
     const sort = useSelector((state) => state.filters.sort);
     const { rawBooks, books, status, error, hasMore } = useSelector((state) => state.books);
