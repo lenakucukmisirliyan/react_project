@@ -37,3 +37,21 @@ button {
   height: 40px;
   display: inline-block
 }
+
+.btn-danger.active {
+  border: 2px solid darkred;
+}
+
+.btn-primary.active {
+  border: 2px solid navy;
+}
+
+.lang-button {
+  border: 1px solid transparent;
+  transition: border-color 0.25s ease;
+
+  &.active {
+    border-color: #000000;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  }
+}

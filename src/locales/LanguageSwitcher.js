@@ -5,7 +5,7 @@ const LanguageSwitcher = ({ locale, setLocale }) => {
   };
 
   return (
-    <div className="switch-button">
+    <div className="lang-button">
       <button
         className={`btn btn-danger ${locale === 'tr' ? 'active' : ''}`}
         onClick={() => changeLocale('tr')}

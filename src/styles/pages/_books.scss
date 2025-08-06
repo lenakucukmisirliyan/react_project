@@ -1,54 +1,70 @@
-$card-bg-color: #c4f9d8d7;
 $btn-font-size: 1rem;
 $btn-padding: 5px 5px;
 $btn-width: 110px;
 $btn-radius: 8px;
+$color-text-light: rgb(211, 211, 211);
 
-.card {
+.book-card {
   max-width: 250px;
-  font-size: 0.9rem;
+  height: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
   margin: 0;
-  height: 100px;
-  padding: 25px;
-  border: 1px solid rgb(211, 211, 211);
+  padding: 0.75rem 0.5rem;
+  font-size: 0.9rem;
+  border: 1px solid $color-text-light;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgb(0 0 0 / 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
-  .card-body {
+  .book-card-body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px 0;
 
-    .card-title {
+    .book-title {
       font-size: 0.85rem;
       margin-bottom: 0.3rem;
+      text-align: center;
     }
 
-    .card-text {
+    .book-author {
       font-size: 0.9rem;
       margin-bottom: 0.3rem;
+      text-align: center;
     }
 
-    .btn-primary {
+    .book-btn {
       font-size: $btn-font-size;
       padding: $btn-padding;
-      border-radius: $btn-radius;
       width: $btn-width;
+      border-radius: $btn-radius;
       text-align: center;
+      cursor: pointer;
+      color: #fff;
+      border: none;
+      margin-top: auto;
+
+      &:hover {
+        background-color: #444;
+      }
     }
   }
 
-  .card-img-top {
+  .book-img {
     height: 220px;
     padding-top: 15px;
     object-fit: contain;
+    width: 100%;
   }
 }

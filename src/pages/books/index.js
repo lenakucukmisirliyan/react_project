@@ -21,7 +21,7 @@ const Books = () => {
         const loadData = async () => {
             try {
                 showPageLoader();
-                await dispatch(fetchBooks({ query : 'react', lang: currentLang, page })).unwrap();   // .unwrap() → Hata varsa try/catch’e düşmesini sağlar.
+                await dispatch(fetchBooks({ query: 'react', lang: currentLang, page })).unwrap();   // .unwrap() → Hata varsa try/catch’e düşmesini sağlar.
             } catch (err) {
                 console.error("Kitapları çekerken hata:", err);
             } finally {
@@ -54,23 +54,26 @@ const Books = () => {
     if (isInitialLoading) return <Loader />;
 
     return (
-        <div className="container mt-4 books-container" style={{ paddingBottom: '150px' }}>
+        <div className="container mt-4 books-container">
             <div className="row">
+                <h2 className="p-3 page-title">
+                    <FormattedMessage id="books.title" defaultMessage="Books" />
+                </h2>
                 {Array.isArray(books) && books.map((book) => {
                     const volumeInfo = book.volumeInfo;
                     return (
                         <div className="col-md-3 mb-4" key={book.id}>
-                            <div className="card h-100">
+                            <div className="book-card h-100">
                                 {volumeInfo.imageLinks?.thumbnail && (
                                     <img
                                         src={volumeInfo.imageLinks.thumbnail}
-                                        className="card-img-top"
+                                        className="book-img"
                                         alt={volumeInfo.title}
                                     />
                                 )}
-                                <div className="card-body d-flex flex-column">
-                                    <h5 className="card-title">{volumeInfo.title}</h5>
-                                    <p className="card-text">
+                                <div className="book-card-body d-flex flex-column">
+                                    <h5 className="book-title">{volumeInfo.title}</h5>
+                                    <p className="book-author">
                                         {volumeInfo.authors?.join(', ') || (
                                             <FormattedMessage id="books.unknownAuthor" />
                                         )}
@@ -79,7 +82,7 @@ const Books = () => {
                                         href={volumeInfo.infoLink}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="btn btn-primary mt-auto"
+                                        className="btn btn-primary book-btn"
                                     >
                                         <FormattedMessage id="books.viewDetails" />
                                     </a>
