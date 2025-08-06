@@ -3,16 +3,18 @@ import axios from "axios";
 
 export const fetchBooks = createAsyncThunk(
     "books/fetchBooks",
-    async ({ query, lang, page = 1 }) => {
+    async ({ query, lang, freeOnly, orderBy, page = 1 }) => {
         const startIndex = (page - 1) * 20;
+        const q = freeOnly ? `${query} free-ebooks` : query;
         const response = await axios.get(
             `https://www.googleapis.com/books/v1/volumes`,
             {
                 params: {
                     q: query,
-                    langRestrict: lang,
+                    langRestrict: lang || undefined,
                     startIndex,
                     maxResults: 20,
+                    printType: "books",
                 }
             }
         );
@@ -26,9 +28,26 @@ const booksSlice = createSlice({
         books: [],
         status: "idle",  // Henüz hiçbir istek yapılmadı anlamında
         error: null,
-        hasMore: true
+        hasMore: true,
+        rawBooks: [],
     },
-    reducers: {},
+    reducers: {
+        setSortedBooks(state, action) {
+            if (action.payload === "az") {
+                state.books = [...state.rawBooks].sort((a, b) =>
+                    a.volumeInfo.title.localeCompare(b.volumeInfo.title)
+                );
+            } else if (action.payload === "za") {
+                state.books = [...state.rawBooks].sort((a, b) =>
+                    b.volumeInfo.title.localeCompare(a.volumeInfo.title)
+                );
+            } else {
+                // önerilen
+                state.books = [...state.rawBooks];
+            }
+        }
+
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchBooks.pending, (state) => {
@@ -39,9 +58,12 @@ const booksSlice = createSlice({
                 const isFirstPage = action.meta.arg.page === 1;  // createAsyncThunk’a gönderdiğimiz parametredeki page'i alıyor
                 const newBooks = action.payload;
 
-                state.books = isFirstPage
-                    ? newBooks                  // Eğer bu 1. sayfa ise önceki kitapları sil sadece yenileri koy
-                    : [...state.books, ...newBooks]; // Eğer bu bir scroll ile gelen 2., 3. sayfa gibi bir şeyse öncekilere ekle
+                if (isFirstPage) {
+                    state.rawBooks = newBooks;
+                } else {
+                    state.rawBooks = [...state.rawBooks, ...newBooks];
+                }
+
                 state.hasMore = newBooks.length > 0;
             })
             .addCase(fetchBooks.rejected, (state, action) => {
@@ -51,4 +73,5 @@ const booksSlice = createSlice({
     }
 });
 
+export const { setSortedBooks } = booksSlice.actions;
 export default booksSlice.reducer;

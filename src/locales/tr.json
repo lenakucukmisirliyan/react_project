@@ -27,5 +27,7 @@
   "books.viewDetails": "İncele",
   "books.authors": "Yazarlar",
   "books.unknownAuthor": "Bilinmeyen Yazar",
-  "books.noMoreResults": "Tüm kitaplar yüklendi."
+  "books.noMoreResults": "Tüm kitaplar yüklendi.",
+
+  "books.recommended": "Önerilen"
 }

@@ -27,5 +27,7 @@
   "books.viewDetails": "View",
   "books.authors": "Authors",
   "books.unknownAuthor": "Unknown Author",
-  "books.noMoreResults": "All books uploaded."
+  "books.noMoreResults": "All books uploaded.",
+
+  "books.recommended": "Recommended"
 }

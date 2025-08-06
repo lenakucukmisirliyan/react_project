@@ -1,16 +1,19 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBooks } from '../../features/books/booksSlice';
+import { fetchBooks, setSortedBooks } from '../../features/books/booksSlice';
 import '../../styles/pages/_books.scss';
 import { useIntl, FormattedMessage } from 'react-intl';
 import Loader from '../../components/Loader';
 import usePageLoader from '../../utils/usePageLoader';
+import BooksFilters from "../../components/BooksFilters";
+
 
 const Books = () => {
     const intl = useIntl();
     const currentLang = intl.locale;
     const dispatch = useDispatch();
-    const { books, status, error, hasMore } = useSelector((state) => state.books);
+    const sort = useSelector((state) => state.filters.sort);
+    const { rawBooks, books, status, error, hasMore } = useSelector((state) => state.books);
     const { showPageLoader, hidePageLoader } = usePageLoader();
     const [page, setPage] = useState(1);
     const bottomRef = useRef(null);
@@ -21,7 +24,7 @@ const Books = () => {
         const loadData = async () => {
             try {
                 showPageLoader();
-                await dispatch(fetchBooks({ query: 'react', lang: currentLang, page })).unwrap();   // .unwrap() → Hata varsa try/catch’e düşmesini sağlar.
+                await dispatch(fetchBooks({ query: 'react', page })).unwrap();   // .unwrap() → Hata varsa try/catch’e düşmesini sağlar.
             } catch (err) {
                 console.error("Kitapları çekerken hata:", err);
             } finally {
@@ -30,7 +33,12 @@ const Books = () => {
         };
 
         loadData();
-    }, [dispatch, currentLang, page]);
+    }, [dispatch, page]);
+
+    useEffect(() => {
+        if (!rawBooks) return;
+        dispatch(setSortedBooks(sort));
+    }, [rawBooks, sort, dispatch]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(  //Scroll event'ini algılamak için
@@ -56,9 +64,10 @@ const Books = () => {
     return (
         <div className="container mt-4 books-container">
             <div className="row">
-                <h2 className="p-3 page-title">
+                <h2 className="p-3 page-title mb-0">
                     <FormattedMessage id="books.title" defaultMessage="Books" />
                 </h2>
+                <BooksFilters />
                 {Array.isArray(books) && books.map((book) => {
                     const volumeInfo = book.volumeInfo;
                     return (

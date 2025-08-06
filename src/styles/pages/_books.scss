@@ -3,6 +3,9 @@ $btn-padding: 5px 5px;
 $btn-width: 110px;
 $btn-radius: 8px;
 $color-text-light: rgb(211, 211, 211);
+$card-border-color: rgba(211, 211, 211, 0.5);
+$btn-bg-color: #007bff;
+$btn-bg-hover: darken($btn-bg-color, 10%);
 
 .book-card {
   max-width: 250px;
@@ -66,5 +69,36 @@ $color-text-light: rgb(211, 211, 211);
     padding-top: 15px;
     object-fit: contain;
     width: 100%;
+  }
+}
+
+.filters {
+  text-align: right;
+  margin-bottom: 20px;
+
+  label {
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  select {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    margin-left: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: #999;
+      background-color: #f1f1f1;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #666;
+    }
   }
 }

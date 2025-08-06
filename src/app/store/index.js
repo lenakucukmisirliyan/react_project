@@ -4,6 +4,7 @@ import loaderReducer from '../../features/loader/loaderSlice';
 import contactReducer from '../../features/contact/contactSlice';
 import movieDetailReducer from "../../features/movieDetail/movieDetailSlice";
 import booksReducer from "../../features/books/booksSlice";
+import filtersReducer from "../../features/books/filtersSlice";
 
 const reducer = {
   movies: moviesReducer,
@@ -11,6 +12,7 @@ const reducer = {
   loader: loaderReducer,
   contact: contactReducer,
   movieDetail: movieDetailReducer,
+  filters: filtersReducer,
 };
 
 export const store = configureStore({
