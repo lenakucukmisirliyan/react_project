@@ -10,7 +10,16 @@ $btn-radius: 8px;
   margin: 0;
   height: 100px;
   padding: 25px;
-  background-color: $card-bg-color !important;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgb(0 0 0 / 0.2);
+  }
 
   .card-body {
     display: flex;

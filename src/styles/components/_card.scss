@@ -6,6 +6,20 @@
   background: white;
   display: flex;
   flex-direction: column;
+  border: 1px solid $color-text-light;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  button,
+  a {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
 }
 
 img {
@@ -13,15 +27,4 @@ img {
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 0.5rem;
-}
-
-.card,
-button,
-a {
-  transition: all 0.3s ease-in-out;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }

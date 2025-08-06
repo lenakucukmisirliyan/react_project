@@ -32,7 +32,7 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <div className="contact">
       <h2><FormattedMessage id="contact.title" defaultMessage="İletişim" /></h2>
 
       <form onSubmit={handleSubmit}>

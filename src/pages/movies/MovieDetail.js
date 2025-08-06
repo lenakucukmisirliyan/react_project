@@ -47,7 +47,7 @@ const MovieDetail = ({ lang }) => {
                         />
                     )}
                 </div>
-                <div className="col-md-8">
+                <div className="col-md-8 movie-detail">
                     <h2>{movie.title || movie.original_title}</h2>
                     <p>{movie.overview || "Açıklama yok."}</p>
                     <p className="color-text-dark">

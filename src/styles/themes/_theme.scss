@@ -5,7 +5,6 @@ body.dark-theme {
     background-color: #1e1e1e;
   }
 
-
   button {
     background-color: #333;
     color: #fff;
@@ -17,5 +16,13 @@ body.dark-theme {
 
   .dummy-chat-container {
     color: var(--color-text-dark);
+  }
+
+  .movie-detail,
+  .movies-list,
+  .page-title,
+  .about-content,
+  .contact {
+    color: $color-text-light;
   }
 }

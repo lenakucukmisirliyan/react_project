@@ -95,7 +95,7 @@ const Movies = ({ lang }) => {
   return (
     <div>
       <div className="films-header">
-        <h2 className="list-group-item list-group-item-danger p-3 page-title">
+        <h2 className="p-3 page-title">
           <FormattedMessage id="movies.title" defaultMessage="Movies" />
         </h2>
         <div className="search-box">
@@ -111,19 +111,23 @@ const Movies = ({ lang }) => {
 
       </div>
 
-      <ul>
+      <ul className="movies-list">
         {visibleMovies.length > 0 ? (
           visibleMovies.map((movie) => (
-            <li key={movie.id} className="list-group-item list-group-item-info films">
+            <li key={movie.id} className="movie-card">
               <Link to={`/movies/movie?page=${currentPage}&movie=${movie.id}`} className="movie-link">
-                {movie.title || movie.original_title}
+                <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title || movie.original_title} className="movie-img" />
+                <div className="movie-info">
+                  <h3>{movie.title || movie.original_title}</h3>
+                </div>
               </Link>
             </li>
           ))
         ) : (
-          <li className="list-group-item">No movies found on this page.</li>
+          <li className="no-movies">No movies found on this page.</li>
         )}
       </ul>
+
 
       <div className="pagination-container">
         <div className="pagination">

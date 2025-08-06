@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-
 }
 
 .pagination-container {
@@ -33,4 +32,10 @@
   width: auto;
   min-width: 100px;
   text-align: center;
+
+  .dark-theme & {
+    background-color: $button-bg-light;
+    color: black;
+    border: 1px solid blue;
+  }
 }
