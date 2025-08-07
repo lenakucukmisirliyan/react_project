@@ -42,7 +42,6 @@ const booksSlice = createSlice({
                     b.volumeInfo.title.localeCompare(a.volumeInfo.title)
                 );
             } else {
-                // önerilen
                 state.books = [...state.rawBooks];
             }
         }
