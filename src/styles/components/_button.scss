@@ -1,20 +1,15 @@
 @import "../abstracts/variables";
 
 button {
-  font-family: inherit;
-  margin: 2px !important;
-  font-size: 1em;
-  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px !important;
+  color: white !important;
+  font-weight: 300;
   cursor: pointer;
-  padding: 0.6em 1.2em;
   border: 1px solid transparent;
   border-radius: 8px;
-  background-color: $button-bg-dark;
+  background-color: #111;
   transition: border-color 0.25s;
-
-  &:hover {
-    border-color: $color-primary;
-  }
 
   &:focus,
   &:focus-visible {
@@ -29,29 +24,27 @@ button {
   border: none;
   padding: 0;
   margin: 0;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .back-button-img {
   width: 100px;
   height: 40px;
-  display: inline-block
-}
-
-.btn-danger.active {
-  border: 2px solid darkred;
-}
-
-.btn-primary.active {
-  border: 2px solid navy;
+  display: inline-block;
 }
 
 .lang-button {
-  border: 1px solid transparent;
-  transition: border-color 0.25s ease;
+  display: flex;
+  align-items: center;
 
-  &.active {
-    border-color: #000000;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  button {
+    border: 1px solid transparent;
+    transition: border-color 0.25s ease;
+    font-weight: 300;
+    margin: 0;
+
+    &.active {
+      font-weight: 700 !important;
+    }
   }
 }

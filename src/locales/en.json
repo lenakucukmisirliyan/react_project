@@ -4,7 +4,7 @@
   "menu.4": "Contact",
   "menu.3": "Books",
 
-  "about.title": "About Me",
+  "about.title": "ABOUT ME",
   "movies.title": "Favorite Movies",
   "contact.title": "Contact",
   "books.title": "Books",
@@ -29,5 +29,7 @@
   "books.unknownAuthor": "Unknown Author",
   "books.noMoreResults": "All books uploaded.",
 
-  "books.recommended": "Recommended"
+  "books.recommended": "Recommended",
+
+  "download": "Download CV"
 }

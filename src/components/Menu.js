@@ -5,15 +5,22 @@ import ThemeSwitcher from './ThemeSwitcher';
 
 const Menu = ({ lang, setLocale }) => {
   return (
-    <nav className="menu navbar navbar-expand-lg navbar-light bg-warning">
-      <div className="container-fluid">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+    <aside className="sidebar">
+      {/* Üstte Dil ve Tema Switcher */}
+      <div className="sidebar-top">
+        <LanguageSwitcher locale={lang} setLocale={setLocale} />
+        <ThemeSwitcher />
+      </div>
+
+      {/* Menü Listesi */}
+      <nav className="sidebar-nav">
+        <ul>
           {MENU_ITEMS.map(item => (
-            <li key={item.id} className="nav-item">
+            <li key={item.id}>
               <NavLink
                 to={item.url}
                 className={({ isActive }) =>
-                  isActive ? "nav-link fw-bold text-primary" : "nav-link fw-bold text-dark"
+                  isActive ? "active" : ""
                 }
               >
                 {item.label[lang]}
@@ -21,13 +28,8 @@ const Menu = ({ lang, setLocale }) => {
             </li>
           ))}
         </ul>
-
-        <div className="switch button d-flex align-items-center gap-2 ms-auto">
-          <LanguageSwitcher locale={lang} setLocale={setLocale} />
-          <ThemeSwitcher />
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </aside>
   );
 };
 

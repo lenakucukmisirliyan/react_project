@@ -4,7 +4,7 @@
   "menu.4": "İletişim",
   "menu.3": "Kitaplar",
   
-  "about.title": "Hakkımda",
+  "about.title": "HAKKIMDA",
   "movies.title": "Sevdiğim Filmler",
   "contact.title": "İletişim",
   "books.title": "Kitaplar",
@@ -29,5 +29,7 @@
   "books.unknownAuthor": "Bilinmeyen Yazar",
   "books.noMoreResults": "Tüm kitaplar yüklendi.",
 
-  "books.recommended": "Önerilen"
+  "books.recommended": "Önerilen",
+
+  "download": "CV'yi İndir"
 }

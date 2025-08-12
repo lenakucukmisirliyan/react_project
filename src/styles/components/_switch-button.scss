@@ -1,6 +1,6 @@
 .theme-switcher {
-  width: 60px;
-  height: 30px;
+  width: 40px;
+  height: 20px;
   border-radius: 30px;
   background-color: #ccc;
   cursor: pointer;
@@ -14,21 +14,21 @@
     height: 100%;
     position: relative;
     border-radius: 30px;
-    background-color: #230c61;
+    background-color: #787878;
     transition: background-color 0.3s;
 
     &.switch-dark {
-      background-color: #230c61;
+      background-color: #787878;
 
       .thumb {
-        transform: translateX(30px);
+        transform: translateX(20px);
       }
     }
 
     .thumb {
       position: relative;
-      width: 18px;
-      height: 18px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background-color: rgb(255, 255, 255);
       top: 3px;

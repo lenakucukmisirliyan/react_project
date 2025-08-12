@@ -2,10 +2,10 @@ import messages_tr from '../locales/tr.json';
 import messages_en from '../locales/en.json';
 
 export const MENU_ITEMS = [
-  { id: 1, label: { tr: 'Hakkımda', en: 'About Me' }, url: '/about-me' },
-  { id: 2, label: { tr: 'Filmler', en: 'Movies' }, url: '/movies' },
-  { id: 3, label: { tr: 'Kitaplar', en: 'Books' }, url: '/books' },
-  { id: 4, label: { tr: 'İletişim', en: 'Contact' }, url: '/contact' }
+  { id: 1, label: { tr: 'HAKKIMDA', en: 'ABOUT' }, url: '/about-me' },
+  { id: 2, label: { tr: 'FİLMLER', en: 'MOVIES' }, url: '/movies' },
+  { id: 3, label: { tr: 'KİTAPLAR', en: 'BOOKS' }, url: '/books' },
+  { id: 4, label: { tr: 'İLETİŞİM', en: 'CONTACT' }, url: '/contact' }
 ];
 
 export const PAGE_ID_LIST = {

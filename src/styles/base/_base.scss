@@ -32,7 +32,7 @@ body {
   overflow-y: visible;
   color: var(--text-color);
   font-family: $font-main;
-  background-color: #fcf3f1 !important;
+  background-color: #F6F6F6 !important;
   padding: 0px;
   width: 100% !important;
   font-family: 'Inter', sans-serif;
@@ -70,17 +70,14 @@ h1 {
 #root {
   width: 100%;
   margin: auto;
-  padding: 0rem;
+  padding: 20px 0 0 180px;
   text-align: center;
   overflow: visible !important;
 }
 
 .menu {
-  font-size: 25px;
-  color: black;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, bold;
+  font-family: 'Inter', sans-serif;
   margin: 0 auto 10px auto;
-  text-align: center;
   position: relative;
   margin: 0;
   padding: 0;
