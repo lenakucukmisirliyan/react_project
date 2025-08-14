@@ -3,9 +3,9 @@ import { MENU_ITEMS } from "../constants/index";
 import LanguageSwitcher from '../locales/LanguageSwitcher';
 import ThemeSwitcher from './ThemeSwitcher';
 
-const Menu = ({ lang, setLocale }) => {
+const Menu = ({ lang, setLocale, isOpen }) => {
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       {/* Üstte Dil ve Tema Switcher */}
       <div className="sidebar-top">
         <LanguageSwitcher locale={lang} setLocale={setLocale} />
@@ -13,7 +13,7 @@ const Menu = ({ lang, setLocale }) => {
       </div>
 
       {/* Menü Listesi */}
-      <nav className="sidebar-nav">
+      <div className="sidebar-nav">
         <ul>
           {MENU_ITEMS.map(item => (
             <li key={item.id}>
@@ -28,7 +28,7 @@ const Menu = ({ lang, setLocale }) => {
             </li>
           ))}
         </ul>
-      </nav>
+      </div>
     </aside>
   );
 };

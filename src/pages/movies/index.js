@@ -93,65 +93,67 @@ const Movies = ({ lang }) => {
   if (error) return <div className="alert alert-danger">Error: {error}</div>;
 
   return (
-    <div>
-      <div className="films-header">
-        <h2 className="p-3 page-title">
-          <FormattedMessage id="movies.title" defaultMessage="Movies" />
-        </h2>
-        <div className="search-box">
-          <input
-            ref={inputRef}
-            type="text"
-            className="form-control"
-            placeholder="Search by name..."
-            value={inputValue}
-            onChange={handleSearchChange}
-          />
+    <div className="movies-container">
+      <div className="movies-wrapper">
+        <div className="films-header">
+          <h2 className="page-title">
+            <FormattedMessage id="movies.title" defaultMessage="Movies" />
+          </h2>
+          <div className="search-box">
+            <input
+              ref={inputRef}
+              type="text"
+              className="form-control"
+              placeholder="Search by name..."
+              value={inputValue}
+              onChange={handleSearchChange}
+            />
+          </div>
+
         </div>
 
-      </div>
-
-      <ul className="movies-list">
-        {visibleMovies.length > 0 ? (
-          visibleMovies.map((movie) => (
-            <li key={movie.id} className="movie-card">
-              <Link to={`/movies/movie?page=${currentPage}&movie=${movie.id}`} className="movie-link">
-                <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title || movie.original_title} className="movie-img" />
-                <div className="movie-info">
-                  <h3>{movie.title || movie.original_title}</h3>
-                </div>
-              </Link>
-            </li>
-          ))
-        ) : (
-          <li className="no-movies">No movies found on this page.</li>
-        )}
-      </ul>
+        <ul className="movies-list">
+          {visibleMovies.length > 0 ? (
+            visibleMovies.map((movie) => (
+              <li key={movie.id} className="movie-card">
+                <Link to={`/movies/movie?page=${currentPage}&movie=${movie.id}`} className="movie-link">
+                  <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title || movie.original_title} className="movie-img" />
+                  <div className="movie-info">
+                    <h3>{movie.title || movie.original_title}</h3>
+                  </div>
+                </Link>
+              </li>
+            ))
+          ) : (
+            <li className="no-movies">No movies found on this page.</li>
+          )}
+        </ul>
 
 
-      <div className="pagination-container">
-        <div className="pagination">
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
-        <div className="prev-next-buttons">
-          <button
-            onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
-            className="btn btn-secondary me-2"
-            disabled={currentPage === 1}
-          >
-            <FormattedMessage id="page.previous" defaultMessage="Previous" />
-          </button>
-          <button
-            onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
-            className="btn btn-secondary"
-            disabled={currentPage === totalPages}
-          >
-            <FormattedMessage id="page.next" defaultMessage="Next" />
-          </button>
+        <div className="pagination-container">
+          <div className="pagination">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+          <div className="prev-next-buttons">
+            <button
+              onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+              className="btn btn-secondary me-2"
+              disabled={currentPage === 1}
+            >
+              <FormattedMessage id="page.previous" defaultMessage="Previous" />
+            </button>
+            <button
+              onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+              className="btn btn-secondary"
+              disabled={currentPage === totalPages}
+            >
+              <FormattedMessage id="page.next" defaultMessage="Next" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

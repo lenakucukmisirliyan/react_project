@@ -1,11 +1,75 @@
 .about-container {
-  padding: 2rem;
-  margin: 20px 0 20px 50px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  position: relative;
+
+  // Yatay çizgiler
+  &::before,
+  &::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 1.5px;
+    width: 100vw;
+
+  }
+
+  &::before {
+    bottom: 20px; // alt çizgi konumu
+    background-color: #EB5757;
+  }
+
+  &::after {
+    bottom: 17px; // üst çizgi konumu
+    background-color: #1ABCFE;
+  }
+
+
+  .vertical-lines {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    height: 100%;
+    width: 5px;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      width: 1.5px;
+      height: 100%;
+    }
+
+    div:first-child {
+      background-color: #EB5757;
+    }
+
+    div:last-child {
+      background-color: #1ABCFE;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .app-container.sidebar-open & {
+      margin-left: calc(200px + 20px);
+      margin-right: auto;
+      max-width: calc(100% - 220px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+    padding: 1rem;
+  }
 
   h2 {
-    font-weight: 700;
     font-size: 30px;
     margin: 0 0 30px 0;
+    text-align: left;
+    font-size: 2rem;
     text-align: left;
   }
 
@@ -69,12 +133,13 @@
     flex: 1;
     min-width: 0;
     overflow-wrap: break-word;
+    margin-left: 40px;
 
     .info-part {
       display: flex;
       gap: 2rem;
       font-weight: 600;
-      margin: 20px 0 20px 60px;
+      margin: 20px 0 20px 0;
       text-align: left;
 
       .div1,
@@ -84,8 +149,10 @@
     }
 
     p {
-      margin-top: 0;
-      line-height: 1.6;
+      padding-left: 0;
+      line-height: 1.5;
+      text-align: left;
+      font-size: 15px;
     }
 
     .icon-phone,
@@ -103,4 +170,22 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.left {
+  text-align: left;
+}
+
+.experience {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

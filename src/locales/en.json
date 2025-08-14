@@ -5,9 +5,9 @@
   "menu.3": "Books",
 
   "about.title": "ABOUT ME",
-  "movies.title": "Favorite Movies",
-  "contact.title": "Contact",
-  "books.title": "Books",
+  "movies.title": "MOVIES",
+  "contact.title": "CONTACT",
+  "books.title": "BOOKS",
 
   "contact.name": "Name",
   "contact.email": "E-mail",
@@ -31,5 +31,8 @@
 
   "books.recommended": "Recommended",
 
-  "download": "Download CV"
+  "job.description": "Front-End Developer",
+  "download": "Download CV",
+  "old": " 28 years old",
+  "experience": "Years experience..."
 }

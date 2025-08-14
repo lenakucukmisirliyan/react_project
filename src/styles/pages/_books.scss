@@ -7,9 +7,31 @@ $card-border-color: rgba(211, 211, 211, 0.5);
 $btn-bg-color: #007bff;
 $btn-bg-hover: darken($btn-bg-color, 10%);
 
+.books-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  transition: margin-left 0.3s ease;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; // ortalamak için
+  gap: 1.5rem;
+
+  &.sidebar-open {
+    margin-left: calc(220px + 20px);
+    max-width: calc(100% - 220px);
+  }
+
+  &.sidebar-closed {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+  }
+}
+
 .book-card {
   max-width: 250px;
-  height: 100%;
   min-height: 350px;
   display: flex;
   flex-direction: column;

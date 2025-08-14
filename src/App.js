@@ -1,5 +1,6 @@
 import Menu from './components/Menu';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import About from './pages/about';
 import Movies from './pages/movies';
 import Contact from './pages/contact';
@@ -20,28 +21,43 @@ const routeList = {
 
 const App = ({ lang, setLocale }) => {
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   return (
-    <div className="app-container">
-      <Menu lang={lang} setLocale={setLocale} />
-      <Loader />
-      <Routes>
-        <Route path="/" element={<Navigate to="/about-me" replace />} />
-        {MENU_ITEMS.map(item => {
-          const Component = routeList[item.id];
-          return (
-            <Route
-              key={item.id}
-              path={item.url}
-              element={<Component lang={lang} />}
-            />
-          );
-        })}
-        <Route path="/movies/page/:page" element={<Movies lang={lang} />} />
-        <Route path="/movies/movie" element={<MovieDetail lang={lang} />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <DummyChat />
+    <div className={`app-container ${isSidebarOpen ? 'sidebar-open' : ''} `}>
+
+      <button
+        className={`hamburger-btn ${isSidebarOpen ? 'sidebar-open' : ''}`}
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+        &#9776;
+      </button>
+
+      <Menu
+        lang={lang}
+        setLocale={setLocale}
+        isOpen={isSidebarOpen}
+      />
+      <main className='main-content'>
+        <Loader />
+        <Routes>
+          <Route path="/" element={<Navigate to="/about-me" replace />} />
+          {MENU_ITEMS.map(item => {
+            const Component = routeList[item.id];
+            return (
+              <Route
+                key={item.id}
+                path={item.url}
+                element={<Component lang={lang} />}
+              />
+            );
+          })}
+          <Route path="/movies/page/:page" element={<Movies lang={lang} />} />
+          <Route path="/movies/movie" element={<MovieDetail lang={lang} />} />
+          <Route path="/books" element={<Books />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <DummyChat />
+      </main>
     </div>
   );
 };

@@ -5,9 +5,9 @@
   "menu.3": "Kitaplar",
   
   "about.title": "HAKKIMDA",
-  "movies.title": "Sevdiğim Filmler",
-  "contact.title": "İletişim",
-  "books.title": "Kitaplar",
+  "movies.title": "FİLMLER",
+  "contact.title": "İLETİŞİM",
+  "books.title": "KİTAPLAR",
 
   "contact.name": "İsim",
   "contact.email": "E-posta",
@@ -31,5 +31,8 @@
 
   "books.recommended": "Önerilen",
 
-  "download": "CV'yi İndir"
+  "job.description": "Ön Yüz Geliştirici",
+  "download": "CV'yi İndir",
+  "old": " 28 yaşında",
+  "experience": "Yıllık deneyim..."
 }

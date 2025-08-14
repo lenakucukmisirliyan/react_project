@@ -1,14 +1,64 @@
 .sidebar {
   width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+
   height: 100vh;
   background-color: #111;
   color: #fff;
   display: flex;
   flex-direction: column;
   padding: 20px 15px;
+  z-index: 1000;
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+  }
+}
+
+.main-content {
+  transition: margin-left 0.3s ease;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto; 
+  box-sizing: border-box;
+
+  @media (min-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .app-container.sidebar-open & {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
+.hamburger-btn {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 20px;
+  left: 10px;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #000000;
+  z-index: 1100;
+  cursor: pointer;
+}
+
+.hamburger-btn.sidebar-open {
+  left: 210px;
 }
 
 .sidebar-top {
@@ -24,7 +74,7 @@
 }
 
 .sidebar-nav li {
-  margin: 15px 2px ;
+  margin: 15px 2px;
 }
 
 .sidebar-nav a {

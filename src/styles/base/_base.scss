@@ -31,7 +31,7 @@ body {
   min-height: 100vh;
   overflow-y: visible;
   color: var(--text-color);
-  font-family: $font-main;
+  font-family: 'Inter', sans-serif;
   background-color: #F6F6F6 !important;
   padding: 0px;
   width: 100% !important;
@@ -69,8 +69,8 @@ h1 {
 
 #root {
   width: 100%;
-  margin: auto;
-  padding: 20px 0 0 180px;
+  margin: 0 auto;
+  padding: 0 0 0 0;
   text-align: center;
   overflow: visible !important;
 }
